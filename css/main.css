@@ -36,6 +36,7 @@ a:hover {
 header {
   font-size: 3em;
   font-family: 'Helvetica', 'Arial', 'Sans-Serif';
+  padding-top: 3px;
   display: inline-block;
   float:left;
 }
