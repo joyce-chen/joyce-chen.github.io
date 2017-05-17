@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
 
 /*
 	Phantom by HTML5 UP
@@ -17,7 +17,7 @@
 		font: inherit;
 		vertical-align: baseline;
 	}
-
+	
 	@media screen and (max-width: 1024px) { /* Specific to this particular image */
 	  img.bg {
 	    left: 50%;
