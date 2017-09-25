@@ -1,0 +1,113 @@
+html, body { 
+	width:100%;
+	height:100%;
+	margin:0; 
+	padding:0;
+	overflow:hidden;
+}
+
+h2 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: black;
+	top:0;
+	transition: all 0.2s ease-in-out;
+	animation:fadein 4s;
+}
+
+h2:hover {
+	color: red;
+}
+
+svg { 
+	display:block;
+	margin:10px;
+	height:100%;
+}
+
+.line {
+	stroke-dasharray:4079;
+	stroke-dashoffset:4079;
+	animation:offset 2s linear forwards;
+}
+
+@keyframes offset {
+	to {stroke-dashoffset: 0;}
+}
+
+.diamond {
+	-webkit-clip-path: polygon(50% calc(50% - 71px), calc(50% + 71px) 50%, 
+							   50% calc(50% + 71px), calc(50% - 71px) 50%);
+	clip-path: polygon(50% calc(50% - 71px), calc(50% + 71px) 50%, 
+					   50% calc(50% + 71px), calc(50% - 71px) 50%);
+}
+
+
+div {
+	text-align: center;
+	display:inline-block;
+	position:relative;
+	width:100%;
+	height:100%;
+}
+
+img {
+	display:block;
+	width:142px;
+	background-position:center center;
+	transition: all 0.2s ease-in-out;
+	animation:fadein 4s;
+	-moz-animation:fadein 4s; /* Firefox */
+    -webkit-animation:fadein 4s; /* Safari and Chrome */
+    -o-animation:fadein 4s; /* Opera */
+}
+
+img:hover {
+	transform: scale(1.5);
+}
+
+@keyframes fadein {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {opacity:0;}
+    to {opacity:1;}
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {opacity:0;}
+    to {opacity:1;}
+}
+@-o-keyframes fadein { /* Opera */
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+#art_img {
+	position:absolute;
+	left:665px;
+	top:450px;
+}
+
+#architecture_img {
+	position:absolute;
+	left:315px;
+	top:370px;
+}
+
+#projects_img {
+	position:absolute;
+	left:1011px;
+	top:248px;
+}
+
+#research_img {
+	position:absolute;
+	left:430px;
+	top:114px;
+}
+
+#about_img {
+	position:absolute;
+	left:790px;
+	top:15px;
+}
