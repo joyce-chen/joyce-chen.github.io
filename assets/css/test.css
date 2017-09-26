@@ -6,7 +6,11 @@ html, body {
 	overflow:hidden;
 }
 
-h2 {
+h1 {
+	font-size: 40pt;
+}
+
+h1, h2 {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: black;
 	top:0;
@@ -14,8 +18,8 @@ h2 {
 	animation:fadein 4s;
 }
 
-h2:hover {
-	color: red;
+h1:hover, h2:hover {
+	color: grey;
 }
 
 svg { 
@@ -40,7 +44,6 @@ svg {
 	clip-path: polygon(50% calc(50% - 71px), calc(50% + 71px) 50%, 
 					   50% calc(50% + 71px), calc(50% - 71px) 50%);
 }
-
 
 div {
 	text-align: center;
