@@ -195,6 +195,7 @@ blockquote {
   font-size: 13pt;
   transition: all 0.2s ease-in-out;
   animation:fadein 3s;
+  line-height: 200%;
 }
 
 code {
@@ -219,6 +220,10 @@ code {
 
 .fourth_image {
   width:24%;
+}
+
+.fifth_image {
+  width:19%;
 }
 
 /*Tiles-----------------------------------------------------------------------------*/
