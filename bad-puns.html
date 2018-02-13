@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--
+Modern Perverbs, copyright (c) 2014 Nick Montfort <nickm@nickm.com>
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<style type="text/css">
+/* <![CDATA[ */
+body {
+	background: #fff;
+	color: #000;
+	margin: 0 18pt 0 18pt;
+	font-family: Optima, sans-serif;
+	font-size: 13pt;
+}
+a {
+	color: #000080;
+	text-decoration: underline;
+}
+/* ]]> */
+</style>
+
+<script type="text/javascript">
+var t = 0;
+// All but the last character ends up as the beginning of the output.
+// The last character is tacked onto the very end.
+var left = ["How do you throw a space party?",
+			"How was Rome split in two?",
+			"Did you hear about the guy who lost the left side of his body?",
+			"What do you do with a dead chemist?",
+			"What does a clock do when it's hungry?",
+			"What do you call a beautiful pumpkin?",
+			"What do you call a cow with no legs?",
+			"What do you call a cow with all of its legs?",
+			"What did the buffalo say to his son?",
+			"What do you call a fake noodle?",
+			"What do cows tell each other at bedtime?"
+			];
+// This ends up as the end of the output, except for the very last character.
+var right = ["You planet.",
+			 "With a pair of Ceasars.",
+			 "He's alright now.",
+			 "You barium.",
+			 "It goes back for seconds.",
+			 "GOURDgeous.",
+			 "Ground beef.",
+			 "High steaks.",
+			 "Bison.",
+			 "An impasta.",
+			 "Dairy tales."
+			];
+
+function rand_range(max) {
+    "use strict";
+    return Math.floor(Math.random() * (max + 1));
+}
+
+function litany() {
+    "use strict";
+    var last, text, l, r, main = document.getElementById('main');
+    if (t <= 24) {
+        t += 1;
+    } else {
+        main.removeChild(document.getElementById('main').firstChild);
+    }
+    last = document.createElement('div');
+    l = rand_range(left.length - 1);
+    r = rand_range(right.length - 1);
+    if (l == r) {
+    	r = rand_range(right.length - 1);
+    }
+    text = left[l] + " " + right[r];
+    last.appendChild(document.createTextNode(text));
+    main.appendChild(last);
+}
+
+function produce_litany() {
+    "use strict";
+    litany();
+    setInterval(litany, 2900);
+}
+</script>
+	<title>Bad Puns</title>
+</head>
+
+<body onload="produce_litany();" cz-shortcut-listen="true">
+
+<div style="float:right; background:#fff; 
+			margin:0 6px 0 6px; 
+			border-left:thin #000 solid; 
+			border-bottom:thin #000 solid; 
+			border-right:thin #000 solid; 
+			padding:9px">
+<div><b>Bad Puns</b><br>
+	by Joyce Chen<br><br>
+	Based on<br>
+	<b>Modern Perverbs</b><br>
+	by <a href="http://nickm.com/">Nick Montfort</a></div>
+</div>
+
+<div id="main" style="padding-top:18px;"></div>
+
+</body></html>
