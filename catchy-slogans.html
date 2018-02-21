@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <title>Catchy Slogans</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Calligraffitti|Gloria+Hallelujah|Indie+Flower|Libre+Baskerville|Lobster|Montserrat|Open+Sans|Pacifico|Quicksand|Roboto|Shadows+Into+Light" rel="stylesheet"> 
+
+<body style="font-family: Helvetica, 'Nimbus Sans L', 'Liberation Sans', Arial, sans-serif; padding:14px 28px 0 28px" cz-shortcut-listen="true">
+
+<div style="text-align:center; font-size:15px; padding: 14px 0 28px 0;">
+    <b style="font-size:20px">Catchy Slogans,</b> by Joyce Chen. <br><br>
+    Based on Upstart by <a href="http://nickm.com/">Nick Montfort</a>.</div>
+
+<div id="advert" style="text-align: center; height: 300px; width: 100%; 
+    background: red none repeat scroll 0% 0%; color: white; float: left; 
+    text-align: center; padding-top: 180px;
+    font-family: Arial\ Black, Gadget, sans-serif; font-size:40px;">
+    Nothing
+</div>
+
+<script type="text/javascript">
+var options = [
+            ["McDonald\'s",     "I\'m lovin\' it!"],
+            ["Burger King",     "Have it your way."],
+            ["KFC",             "Finger lickin\' good."],
+            ["Subway",          "Eat fresh."],
+            ["Skittles",        "Taste the rainbow."],
+            ["Rice Krispies",   "Snap, Crackle, and Pop!"],
+            ["Frosted Flakes",  "The\'re gr-r-r-reat!"],
+            ["Allstate",        "You\'re in good hands with ---."],
+            ["Walmart",         "Save money. Live better."],
+            ["Disney Parks",    "Where dreams come true."],
+            ["Dunkin\' Donuts", "America runs on Dunkin\'."],
+            ["Nike",            "Just do it!"],
+            ["Ford",            "Go further."],
+            ["Tesco",           "Every little helps."],
+            ["Apple",           "Think different."],
+            ["Adidas",          "Impossible is nothing."],
+            ["L\'Oreal Paris",  "Because you're worth it."],
+            ["M&M\'s",          "Melts in your mouth, not in your hand."],
+            ["Campbell\'s",     "Mmm mmm good!"],
+            ["BMW",             "The ultimate driving machine."],
+            ["Bounty",          "The quicker picker upper."],
+            ["State Farm",      "Like a good neighbor, --- is there."],
+            ["Nikon",           "At the heart of image."],
+            ["Levi\'s",         "Quality never goes out of style."],
+            ["Kay",             "Every kiss begins with ---."],
+            ["Volkswagen",      "Think small."],
+            ["Capital One",     "What\'s in your wallet?"],
+            ["GE",              "Imagination at work."],
+            ["3M",              "Innovation."],
+            ["IMAX",            "Think big."],
+            ["Trix",            "Silly Rabbit, --- are for kids."],
+            ["Sour Patch Kids", "First they\'re sour, then they\'re sweet."]
+            ], 
+    fonts = [
+            'Arial, Helvetica, sans-serif',
+            'Arial Black, Gadget, sans-serif',
+            'Impact, Charcoal, sans-serif',
+            'Lucida Sans Unicode, Lucida Grande, sans-serif',
+            'Tahoma, Geneva, sans-serif',
+            'Trebuchet, Trebuchet MS, sans-serif',
+            'Verdana, Geneva, sans-serif',
+            'Helvetica Neue, Helvetica, Arial, sans-serif',
+            'Montserrat, sans-serif',
+            'Indie Flower, cursive',
+            'Lobster, cursive',
+            'Libre Baskerville, serif',
+            'Quicksand, sans-serif',
+            'Abril Fatface, cursive',
+            'Pacifico, cursive',
+            'Shadows Into Light, cursive',
+            'Gloria Hallelujah, cursive',
+            'Roboto, sans-serif',
+            'Open Sans, sans-serif',
+            'Calligraffitti, cursive'
+            ],
+    colors = [
+            "red", "salmon", "crimson",
+            "turquoise", "teal", "navy", "aquamarine", "dodgerblue",
+            "yellow", "gold", "peachpuff",
+            "green", "limegreen", "olive", "palegreen", "mediumaquamarine",
+            "orange", "tomato",
+            "purple", "orchid", "plum", "lavender",
+            "black", "darkgray", "slategray",
+            "brown", "maroon", "chocolate", "tan"
+            ]
+
+function rand_index(len) {
+    return Math.floor(Math.random() * len);
+}
+
+function update() {
+    "use strict";
+    var company, slogan, font, color, advertdiv = document.getElementById('advert');
+    company = rand_index(options.length);
+    slogan = rand_index(options.length);
+    if (slogan === company) { 
+        slogan = rand_index(options.length); 
+    }
+
+    advertdiv.innerHTML = options[company][0] + "<br>" + options[slogan][1];
+    font = fonts[rand_index(fonts.length)];
+    color = colors[rand_index(colors.length)]
+    advertdiv.style.fontFamily = font;
+
+    if (color === "yellow" || color === "peachpuff" || 
+        color === "aquamarine" || color === "palegreen" ||
+        color === "lavender") {
+        advertdiv.style.color = "black";
+    } else {
+        advertdiv.style.color = "white";
+    }
+
+    advertdiv.style.background = color;
+}
+
+update();
+update();
+update();
+update();
+setInterval(update, 1200);
+</script>
+
+
+</body></html>
