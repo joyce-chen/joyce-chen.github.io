@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--
+Stochastic Hunger by Joyce Chen,
+based on Stochastic Text by
+copyright (c) 2014 Nick Montfort <nickm@nickm.com>
+based on a 1959 program (Stochastische Texte) by Theo Lutz
+the text is a translation of Lutz's German text by Helen MacCormack
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-->
+<style type="text/css">
+/* <![CDATA[ */
+body {
+ background:#000;
+ color:#ccc;
+ margin:0 0 0 18pt;
+ font-family:Optima, sans-serif;
+ font-size:16pt;
+}
+a {
+  color: #000080;
+  text-decoration: underline;
+}
+#main {
+ padding-top:18px;
+ width:100%;
+}
+#main div {
+ font-weight:bold;
+ padding-bottom:9px;
+}
+#info {
+  font-size: 13pt;
+  color: #000;
+  float:right; 
+  background:#fff; 
+  margin: 0 6px 0 6px; 
+  border-left:thin #000 solid; 
+  border-bottom:thin #000 solid; 
+  border-right:thin #000 solid; 
+  padding: 9px;
+}
+/* ]]> */
+</style>
+<script type="text/javascript">
+
+var t = 0,
+subjects = ['FOOD', 'ORANGE', 'GRAPE', 'APPLE', 'CARROT', 'TOMATO',
+            'EGGPLANT', 'SPINACH', 'BREAD', 'PASTA', 'MUSHROOM', 'ICE CREAM',
+            'PIE', 'PIZZA', 'STEAK', 'CHEESE'],
+predicates = ['YUMMY', 'DELICIOUS', 'FRESH', 'GOOD', 'SAVORY', 'FROZEN', 'BURNT',
+              'NEW', 'SWEET', 'SALTY', 'BITTER', 'SPICY', 'CREAMY', 'FREE',
+              'LARGE', 'OLD', 'TART', 'DEADLY', 'WARM', 'COLD', 'CRUNCHY'],
+conjunctions = [' AND ', ' OR ', ' THEREFORE ', ' BUT ', '. ', '. ', '. ', '. ', '. '],
+operators = ['A', 'EVERY', 'NO', 'NOT EVERY', 'SOME'],
+colors = ['#DC143C', //red
+          '#00BFFF', //light blue
+          '#ADFF2F', //lime
+          '#FFA500', //orange
+          '#FFFF00', //yellow
+          '#9400D3', //purple
+          '#F0FFFF', //white
+          '#E0218A' //pink
+          ];
+
+function rand_range(maximum) {
+    "use strict";
+    return Math.floor(Math.random() * (maximum + 1));
+}
+
+function choose(array) {
+    "use strict";
+    return array[rand_range(array.length - 1)];
+}
+
+function is_vowel(letter) {
+  var result = letter == "A" || letter == "E" || letter == "I" || letter == "O" || letter == "U";
+  return result;
+}
+
+function phrase() {
+    "use strict";
+    var text;
+    var op = choose(operators);
+    var sub = choose(subjects);
+    if (is_vowel(sub[0]) && op == 'A') {
+      text = 'AN' + ' ' + sub;
+    } else {
+      text = op + ' ' + sub;
+    }
+
+    return text + ' IS ';
+}
+
+function litany() {
+    "use strict";
+    var last, text, main = document.getElementById('main');
+    var image = document.createElement('img');
+
+    if (10 > t) {
+        t += 1;
+    } else {
+        main.removeChild(document.getElementById('main').firstChild);
+    }
+    last = document.createElement('div');
+    text = phrase() + choose(predicates) + choose(conjunctions);
+    text = text + phrase() + choose(predicates) + '.';
+    last.innerHTML = text;
+    document.getElementById('main').style.color = choose(colors);
+    main.appendChild(last);
+}
+
+function produce_litany() {
+    "use strict";
+    litany();
+    setInterval(litany, 1000);
+}
+
+</script>
+  <title>Stochastic Texts</title>
+</head>
+
+<body onload="produce_litany();" cz-shortcut-listen="true">
+<div id="info">
+    <b>Stochastic Hunger</b><br>
+    by Joyce Chen<br><br>
+    Based on<br>
+    <b>Stochastic Text</b><br />
+    by <a href="http://nickm.com">Nick Montfort</a>
+</div>
+<div id="main"></div>
+<div id="pasta-pic"></div>
+
+</body></html>
