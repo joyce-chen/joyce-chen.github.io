@@ -59,16 +59,23 @@ function rand_index(len) {
 function show_poem() {
     "use strict";
     var poemdiv = document.getElementById('poem');
-    poemdiv.innerHTML = "";
+    poemdiv.innerHTML = "\"";
     var indexes = new Set([]);
+    var numSentences = 5;
 
-    while (indexes.size < 5) {
+    while (indexes.size < numSentences) {
     	indexes.add(rand_index(SENTENCES.length));
     }
 
+    var line = 1;
     for (let i of indexes) {
-    	poemdiv.innerHTML += SENTENCES[i] + "<br>";
+    	poemdiv.innerHTML += SENTENCES[i];
+    	if (line < numSentences) {
+    		poemdiv.innerHTML += "<br>";
+    	}
+    	line += 1;
     }
+    poemdiv.innerHTML += "\"";
 }
 
 show_poem();
