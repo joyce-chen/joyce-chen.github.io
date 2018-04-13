@@ -1,26 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<!DOCTYPE html>
+<html>
+<head>
   <title>Catchy Slogans</title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset = "UTF-8">
 </head>
 
-<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Calligraffitti|Gloria+Hallelujah|Indie+Flower|Libre+Baskerville|Lobster|Montserrat|Open+Sans|Pacifico|Quicksand|Roboto|Shadows+Into+Light" rel="stylesheet"> 
+<body cz-shortcut-listen="true">
 
-<body style="font-family: Helvetica, 'Nimbus Sans L', 'Liberation Sans', Arial, sans-serif; padding:14px 28px 0 28px" cz-shortcut-listen="true">
+<div id="info">
+    <b style="font-size:20px;">Catchy Slogans,</b> by Joyce Chen. <br><br>
+    Based on Upstart by <a href="http://nickm.com/">Nick Montfort</a>.
+</div>
 
-<div style="text-align:center; font-size:15px; padding: 14px 0 28px 0;">
-    <b style="font-size:20px">Catchy Slogans,</b> by Joyce Chen. <br><br>
-    Based on Upstart by <a href="http://nickm.com/">Nick Montfort</a>.</div>
-
-<div id="advert" style="text-align: center; height: 300px; width: 100%; 
-    background: red none repeat scroll 0% 0%; color: white; float: left; 
-    text-align: center; padding-top: 180px;
-    font-family: Arial\ Black, Gadget, sans-serif; font-size:40px;">
+<div id="advert">
     Nothing
 </div>
 
 <script type="text/javascript">
-var options = [
+var OPTIONS = [
             ["McDonald\'s",     "I\'m lovin\' it!"],
             ["Burger King",     "Have it your way."],
             ["KFC",             "Finger lickin\' good."],
@@ -54,7 +51,7 @@ var options = [
             ["Trix",            "Silly Rabbit, --- are for kids."],
             ["Sour Patch Kids", "First they\'re sour, then they\'re sweet."]
             ], 
-    fonts = [
+    FONTS = [
             'Arial, Helvetica, sans-serif',
             'Arial Black, Gadget, sans-serif',
             'Impact, Charcoal, sans-serif',
@@ -76,7 +73,7 @@ var options = [
             'Open Sans, sans-serif',
             'Calligraffitti, cursive'
             ],
-    colors = [
+    COLORS = [
             "red", "salmon", "crimson",
             "turquoise", "teal", "navy", "aquamarine", "dodgerblue",
             "yellow", "gold", "peachpuff",
@@ -88,21 +85,22 @@ var options = [
             ]
 
 function rand_index(len) {
+    "use strict";
     return Math.floor(Math.random() * len);
 }
 
 function update() {
     "use strict";
     var company, slogan, font, color, advertdiv = document.getElementById('advert');
-    company = rand_index(options.length);
-    slogan = rand_index(options.length);
+    company = rand_index(OPTIONS.length);
+    slogan = rand_index(OPTIONS.length);
     if (slogan === company) { 
         slogan = rand_index(options.length); 
     }
 
-    advertdiv.innerHTML = options[company][0] + "<br>" + options[slogan][1];
-    font = fonts[rand_index(fonts.length)];
-    color = colors[rand_index(colors.length)]
+    advertdiv.innerHTML = OPTIONS[company][0] + "<br>" + OPTIONS[slogan][1];
+    font = FONTS[rand_index(FONTS.length)];
+    color = COLORS[rand_index(COLORS.length)]
     advertdiv.style.fontFamily = font;
 
     if (color === "yellow" || color === "peachpuff" || 
@@ -115,13 +113,41 @@ function update() {
 
     advertdiv.style.background = color;
 }
-
-update();
-update();
-update();
 update();
 setInterval(update, 1200);
 </script>
 
 
-</body></html>
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Calligraffitti|Gloria+Hallelujah|Indie+Flower|Libre+Baskerville|Lobster|Montserrat|Open+Sans|Pacifico|Quicksand|Roboto|Shadows+Into+Light" rel="stylesheet">
+
+
+<style type="text/css">
+body, html {
+    font-family: Helvetica, 'Nimbus Sans L', 'Liberation Sans', Arial, sans-serif;
+    padding: 14px 28px 0 28px;
+}
+a {
+    color: #000080;
+    text-decoration: underline;
+}
+#info {
+    text-align: center; 
+    font-size: 15px; 
+    padding: 14px 0 28px 0;
+}
+#advert {
+    text-align: center; 
+    height: 300px; 
+    width: 100%; 
+    background: red none repeat scroll 0% 0%; 
+    color: white; 
+    float: left; 
+    text-align: center; 
+    padding-top: 180px;
+    font-family: Arial\ Black, Gadget, sans-serif; 
+    font-size: 40px;
+}
+</style>
+
+</body>
+</html>
