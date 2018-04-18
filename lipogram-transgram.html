@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Wholesome Lipogram</title>
+	<title>Wholesome Lipogram - Insulting Transgram</title>
 	<meta charset = "UTF-8">
 
 </head>
@@ -43,7 +43,7 @@ const POSITIVE = [
 	"A great listener.",
 	"Cool.",
 	"A blast."
-] // 17
+]
 
 const NEGATIVE = [
 	"Unfunny.",
@@ -63,43 +63,48 @@ const NEGATIVE = [
 	"Shut your mouth.",
 	"Insult upon humanity.",
 	"Catalogued under 'gullible.'"
-] // 15
+]
 
 function rand_index(len) {
     "use strict";
     return Math.floor(Math.random() * len);
 }
 
+var numSentences = 5;
+
 function show_poems() {
-    "use strict";
-    var left = document.getElementById('left-poem');
-    var right = document.getElementById('right-poem');
-    left.innerHTML = "\"";
-    right.innerHTML = "\"";
+	show_left();
+	show_right();
+}
 
-    var indexes = new Set([]);
-    var numSentences = 5;
+function show_left() {
+	"use strict";
+    let left = document.getElementById('left-poem');
+    let leftSentences = POSITIVE.slice();
 
-    while (indexes.size < numSentences) {
-    	indexes.add(rand_index(POSITIVE.length));
+    while (leftSentences.length > numSentences) {
+    	leftSentences.splice(rand_index(leftSentences.length), 1);
     }
 
-    var line = 1;
-    for (let i of indexes) {
-    	left.innerHTML += POSITIVE[i];
-    	right.innerHTML += NEGATIVE[i];
-    	if (line < numSentences) {
-    		left.innerHTML += "<br>";
-    		right.innerHTML += "<br>";
-    	}
-    	line += 1;
+    let leftPoem = leftSentences.join('<br>');
+    left.innerHTML = `"${leftPoem}"`;
+}
+
+function show_right() {
+	"use strict";
+	let right = document.getElementById('right-poem');
+    let rightSentences = NEGATIVE.slice();
+
+	while (rightSentences.length > numSentences) {
+      rightSentences.splice(rand_index(rightSentences.length), 1);
     }
-    left.innerHTML += "\"";
-    right.innerHTML += "\"";
+
+    let rightPoem = rightSentences.join('<br>');
+    right.innerHTML = `"${rightPoem}"`;
 }
 
 show_poems();
-setInterval(show_poems, 2900);
+setInterval(show_poems, 12000);
 </script>
 
 <style type="text/css">
