@@ -9,7 +9,7 @@
 
 <div class="topnav">
 	<a>The Needle Drop</a>
-	<a>Lyric Review</a>
+	<a>Lyrics Review</a>
 	<a>Created by Joyce Chen</a>
 </div>
 
@@ -23,6 +23,7 @@
 		<div id="out">
 			<div id="title"></div>
 			<div id="info"></div>
+			<div id="video"></div>
 			<div id="review"></div>
 		</div>
 	</div>
@@ -70,6 +71,17 @@ const SCORES = {
 	"Total Xanarchy" : "NOT GOOD"
 }
 
+const VIDEOS = {
+	"NOT GOOD" : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/rd1rf/gyrbfm" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	3 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/fisi1/cwjsss" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	4 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/p3j9w/bqgwbg" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	5 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/krxsy/kjzanh" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	6 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/sjlpo/uzqyoe" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	7 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/o91bc/cdbrqo" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	8 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/lv6i9/iskeku" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>',
+	9 : '<div style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/lower/lmnslp" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;"></iframe></div>'
+}
+
 const MIN_WORDS = 10;
 
 document.getElementById('generate').onclick = function () {
@@ -77,6 +89,7 @@ document.getElementById('generate').onclick = function () {
 	if (user_lyrics.length > MIN_WORDS) {
 		var score = ratingSong(user_lyrics);
 		set("review", "According to Anthony Fantano,</br> the internet's busiest music nerd,</br> these lyrics have a score of " + score + ".");
+		set("video", VIDEOS[score]);
 	} else {
 		set("review", "Please write at least " + MIN_WORDS + " words.");
 	}
@@ -222,6 +235,9 @@ button:hover {
 	font-size: 13px;
 	line-height: 1.4em;
 	text-transform: none;
+	margin-bottom: 10px;
+}
+#video {
 	margin-bottom: 10px;
 }
 #review {
