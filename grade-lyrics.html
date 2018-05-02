@@ -8,9 +8,9 @@
 <body cz-shortcut-listen="true">
 
 <div class="topnav">
-	<a>The Needle Drop</a>
-	<a>Lyrics Review</a>
-	<a>Created by Joyce Chen</a>
+	<a href="http://www.theneedledrop.com/">The Needle Drop</a>
+	<a class="noHover">Lyrics Review</a>
+	<a href="http://www.joyceychen.com/">Created by Joyce Chen</a>
 </div>
 
 <div class="container">
@@ -153,6 +153,9 @@ function clearData() {
 	set("title", "");
 	set("info", "");
 }
+const receiver = new playerjs.Receiver();
+receiver.on('setLoop', value => video.loop = false);
+
 </script>
 
 <style type="text/css">
@@ -168,23 +171,28 @@ a {
 	text-decoration: underline;
 }
 .topnav {
+	
     background-color: #333;
     overflow: hidden;
-    text-align: center;
+    padding: 14px 0 14px 0;
 }
 .topnav a {
-	float: left;
+	display: inline-block;
+	min-width: 32%;
 	color: #f2f2f2;
 	text-align: center;
-	padding: 14px 65px;
 	text-decoration: none;
 	font-size: 17px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-weight: 700;
 	font-style: normal;
-	line-height: 1.3em;
-	margin-left: 100pt;
+}
+.topnav a:hover {
+	text-decoration: underline;
+}
+.noHover {
+	text-decoration: none !important;
 }
 .container {
 	margin: 40pt 100pt 0 100pt;
