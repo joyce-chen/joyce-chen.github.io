@@ -86,14 +86,17 @@ const MIN_WORDS = 10;
 
 document.getElementById('generate').onclick = function () {
 	var user_lyrics = document.getElementById("in-lyrics").value;
-	if (user_lyrics.length > MIN_WORDS) {
+	var words = user_lyrics.split(' ');
+	if (words.length > MIN_WORDS) {
+		clearData();
 		var score = ratingSong(user_lyrics);
-		set("review", "According to Anthony Fantano,</br> the internet's busiest music nerd,</br> these lyrics have a score of " + score + ".");
+		set("review", 'According to Anthony Fantano, the internet\'s busiest music nerd, </br>these lyrics have a score of <span style="font-weight:bold">' + score + '</span>.');
 		set("video", VIDEOS[score]);
 	} else {
+		clearData();
 		set("review", "Please write at least " + MIN_WORDS + " words.");
 	}
-	set("title", "Your Song");
+	set("title", "Your Lyrics");
 	set("info", date());
 }
 
@@ -142,6 +145,13 @@ function date() {
 	var dd = d.getDate();
 	var yy = d.getFullYear();
 	return mm + " " + dd + ", " + yy;
+}
+
+function clearData() {
+	set("review", "");
+	set("video", "");
+	set("title", "");
+	set("info", "");
 }
 </script>
 
