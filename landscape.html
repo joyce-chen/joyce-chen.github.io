@@ -30,12 +30,12 @@ var LEFT_LINES = [];
 var RIGHT_LINES = [];
 var CENTER_LINES = [];
 
-function preload() {
-
+function setup() {
+	reset();
 }
 
-function setup() {
-  	createCanvas(displayWidth, displayHeight);
+function reset() {
+	createCanvas(displayWidth, displayHeight);
 	background(0);
 	setupLines(RIGHT_LINES, xLines + dx*numPoints, yLines);
 	setupLines(LEFT_LINES, xLines - dx*numPoints, yLines);
@@ -53,14 +53,13 @@ function draw() {
 	if (RIGHT_LINES[0].length == 0) {
 		setupLines(RIGHT_LINES, xLines + dx*numPoints, yLines);
 	}
-	if (LEFT_LINES.length == numPoints) {
-		if (LEFT_LINES[-1].length == 0) {
+	if (LEFT_LINES.length == numLines) {
+		if (LEFT_LINES[LEFT_LINES.length - 1].length == 0) {
 			setupLines(LEFT_LINES, xLines - dx*numPoints, yLines);
 		}
 	}
-	reset();
+	clearScreen();
     drawLines(CENTER_LINES);
-
     noStroke();
     fill(255);
     text("JOYCE CHEN", xMin + albumWidth/2, yMin + albumHeight - yOffset/2);
@@ -101,20 +100,11 @@ function makeLine(x, y) {
 function drawLines(LINE_LIST) {
 	for (var l = 0; l < LINE_LIST.length; l++) {
 		fill(0);
-		noStroke();
-		beginShape();
-		for (var p = 0; p < LINE_LIST[l].length; p++) {
-			vertex(LINE_LIST[l][p][0], LINE_LIST[l][p][1]);
-		}
-		endShape(CLOSE);
-
-
-		noFill();
 		stroke(255);
 		strokeWeight(1);
 		beginShape();
 		for (var p = 0; p < LINE_LIST[l].length; p++) {
-			vertex(LINE_LIST[l][p][0], LINE_LIST[l][p][1]);
+			curveVertex(LINE_LIST[l][p][0], LINE_LIST[l][p][1]);
 		}
 		endShape();
 	}
@@ -144,7 +134,7 @@ function normalPDF(x, mu, sigma) {
 	return numerator/denominator;
 }
 
-function reset() {
+function clearScreen() {
 	background(0);
 	noFill();
 	stroke(255);
@@ -178,7 +168,7 @@ function keyPressed() {
         CENTER_LINES = shiftPoints(CENTER_LINES, 0, 1);
 
         // Add the bottom, last line
-        var newLine = makeLine(xLines, yLines + (numLines-2)*dy);
+        var newLine = makeLine(xLines, yLines + (numLines-1)*dy);
         CENTER_LINES.push(newLine);
         
     } else if (keyCode === RIGHT_ARROW) {
@@ -187,6 +177,8 @@ function keyPressed() {
     		CENTER_LINES[l].shift();
     	}
 
+    	CENTER_LINES = shiftPoints(CENTER_LINES, -1, 0);
+
     	for (var l = 0; l < numLines; l++) {
     		// Add to CENTER(last) from RIGHT(first)
     		var newPoint = RIGHT_LINES[l][0];
@@ -194,7 +186,6 @@ function keyPressed() {
     		CENTER_LINES[l].push(newPoint);
     	}
 
-    	CENTER_LINES = shiftPoints(CENTER_LINES, -1, 0);
     	RIGHT_LINES = shiftPoints(RIGHT_LINES, -1, 0);
 
     } else if (keyCode === LEFT_ARROW) {
@@ -203,14 +194,18 @@ function keyPressed() {
     		CENTER_LINES[l].pop();
     	}
 
+		CENTER_LINES = shiftPoints(CENTER_LINES, 1, 0);
+
     	for (var l = 0; l < numLines; l++) {
     		// Add to CENTER(first) from LEFT(last)
     		var newPoint = LEFT_LINES[l].pop();
     		CENTER_LINES[l].unshift(newPoint);
     	}
 
-		CENTER_LINES = shiftPoints(CENTER_LINES, 1, 0);
     	LEFT_LINES = shiftPoints(LEFT_LINES, 1, 0);
+
+    } else if (keyCode === ENTER) {
+    	reset();
     }
 }
 
