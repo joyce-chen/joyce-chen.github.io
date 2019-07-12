@@ -525,7 +525,10 @@ section {
   }
 }
 
-@media (min-width: 500px) and (max-width: 784px) {
+
+
+
+@media (min-width: 525px) and (max-width: 784px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
@@ -689,7 +692,7 @@ section {
 
 
 
-@media (min-width: 320px) and (max-width: 499px) {
+@media (min-width: 0px) and (max-width: 524px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
@@ -751,10 +754,16 @@ section {
   }
 
   .intro-name {
+    width: 100%;
     font-size: 35pt;
   }
 
+  .intro-text > div:nth-child(2) {
+    width: 100%;
+  }
+
   .intro-tagline {
+    width: 100%;
     font-size: 20pt;
   }
 
