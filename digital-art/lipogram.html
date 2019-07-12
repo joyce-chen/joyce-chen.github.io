@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wholesome Lipogram</title>
+	<meta charset = "UTF-8">
+
+</head>
+
+<body onload="show_poem();" cz-shortcut-listen="true">
+
+<div id="info">
+    <b style="font-size:30pt;">"no u"
+    </b><br><br>
+    - Joyce Chen
+</div>
+
+<div id="poem">
+</div>
+
+</body>
+
+<script type="text/javascript">
+var SENTENCES = [ 
+	"Always on my mind.",
+	"Look great today.",
+	"A smart cookie.",
+	"Impeccable manners.",
+	"Strong.",
+	"Talented.",
+	"Refreshing.",
+	"An awesome friend.",
+	"Kind.",
+	"Considerate.",
+	"Brave.",
+	"The bee's knees.",
+	"Make a difference.",
+	"Impressive.",
+	"A great listener.",
+	"Cool.",
+	"A blast."
+]
+
+var SENTENCES_WITH_U = [
+	"Have the best laugh.",
+	"Light up the room.",
+	"Very helpful.",
+	"Funny.",
+	"Beautiful.",
+	"Courageous.",
+	"Sunshine on a rainy day."
+]
+
+function rand_index(len) {
+    "use strict";
+    return Math.floor(Math.random() * len);
+}
+
+function show_poem() {
+    "use strict";
+    var poemdiv = document.getElementById('poem');
+    poemdiv.innerHTML = "\"";
+    var indexes = new Set([]);
+    var numSentences = 5;
+
+    while (indexes.size < numSentences) {
+    	indexes.add(rand_index(SENTENCES.length));
+    }
+
+    var line = 1;
+    for (let i of indexes) {
+    	poemdiv.innerHTML += SENTENCES[i];
+    	if (line < numSentences) {
+    		poemdiv.innerHTML += "<br>";
+    	}
+    	line += 1;
+    }
+    poemdiv.innerHTML += "\"";
+}
+
+show_poem();
+setInterval(show_poem, 2900);
+</script>
+
+<style type="text/css">
+body, html {
+	background: #FFFFFF;
+	color: #000000;
+	margin: 32pt 32pt 32pt 32pt;
+	font-family: Optima, sans-serif;
+	font-size: 15pt;
+}
+a {
+	color: #000080;
+	text-decoration: underline;
+}
+#poem {
+	text-align: center; 
+	position: absolute;
+	bottom: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#info {
+	position: absolute;
+	bottom: 30%;
+	left: 60%;
+    text-align: center; 
+    font-size: 15pt;
+}
+</style>
+
+</html>

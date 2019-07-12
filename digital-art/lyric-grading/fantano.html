@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO</title>
+	<meta charset = "UTF-8">
+
+</head>
+
+<body onload="setup();" cz-shortcut-listen="true">
+
+<div id="info">Joyce Chen</div>
+
+<button id="generate">Generate</button>
+<br/>
+<textarea id="out"></textarea>
+
+</body>
+
+<script type="text/javascript">
+
+var FULL_TEXT = '';
+var map = {
+    '_START': []
+}
+var currentWord = '_START';
+
+function setup() {
+    readTextFile("transcript/sleep-transcript.txt");
+}
+
+function readTextFile(file) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file);
+    rawFile.onreadystatechange = function () {
+        if (rawFile.readyState === 4) {
+            if (rawFile.status === 200 || rawFile.status == 0) {
+                var allText = rawFile.responseText.replace(/\n/g, ' ');
+                FULL_TEXT += allText;
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
+function mapping(script) {
+    var words = script.split(" ");
+    map['_START'].push(words[0]);
+    
+    for (var i = 0; i < words.length - 1; i++) {
+        if (!map[words[i]]) {
+            map[words[i]] = [];
+        }
+        map[words[i]].push(words[i + 1]);
+        
+        if (words[i].match(/\.$/)) {
+            map['_START'].push(words[i + 1]);
+        }
+    }
+}
+ 
+document.getElementById('generate').onclick = function () {
+    mapping(FULL_TEXT);
+    var str = '';
+    
+    for (var i = 0; i < 300; i++) {
+        var rand = Math.floor(Math.random() * map[currentWord].length);
+        str += map[currentWord][rand];
+        
+        if (!map[map[currentWord][rand]]) {
+            currentWord = '_START';
+            if (!map[currentWord][rand].match(/\.$/)) {
+                str += '. ';
+            } else {
+                str += ' ';
+            }
+        } else {
+            currentWord = map[currentWord][rand];
+            str += ' ';
+        }
+    }
+    set(str);
+}
+
+function set(script) { 
+	document.getElementById('out').innerHTML = script; 
+}
+
+</script>
+
+<style type="text/css">
+body, html {
+	background: #FFFFFF;
+	color: #000000;
+	margin: 32pt 32pt 32pt 32pt;
+	font-family: Optima, sans-serif;
+	font-size: 20pt;
+}
+a {
+	color: #000080;
+	text-decoration: underline;
+}
+#info {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#out {
+	border: 1px solid;
+	height: 400px;
+	width: 600px;
+}
+</style>
+
+</html>

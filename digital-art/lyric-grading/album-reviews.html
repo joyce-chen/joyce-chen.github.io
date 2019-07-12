@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Grading Lyrics — The Needle Drop</title>
+	<meta charset = "UTF-8">
+</head>
+<body cz-shortcut-listen="true">
+<div class="topnav">
+	<a href="http://www.theneedledrop.com/">The Needle Drop</a>
+	<a class="noHover">Album Review</a>
+	<a href="http://www.joyceychen.com/">Created by Joyce Chen</a>
+</div>
+<div class="container">
+	<div id="left">
+		<textarea id="in" placeholder="Name your album..."></textarea><br/>
+		<button id="generate">Grade me</button>
+	</div>
+	<div id="right">
+		<div id="out">
+			<div id="title"></div>
+			<div id="info"></div>
+			<div id="video"></div>
+			<div id="review"></div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+const SCORES = {
+	"6ix9ine" : 3,
+	"2012 - 2017" : 9,
+	"Boarding House Reach" : 9,
+	"Bobby Tarantino II" : 5,
+	"Culture II" : 4,
+	"Czarface Meets Metal Face" : 7,
+	"Firepower" : 8,
+	"Gumboot Soup" : 7,
+	"Invasion of Privacy" : 6,
+	"MANIA" : "NOT GOOD",
+	"Memories Don't Die" : 3,
+	"My Dear Melancholy" : 5,
+	"The Neighbourhood" : 4,
+	"Room Inside the World" : 6,
+	"Virtue" : 8,
+	"We Beefin" : "NOT GOOD",
+	"Total Xanarchy" : "NOT GOOD"
+}
+
+const VIDEOS = {
+	"NOT GOOD" : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/rd1rf/gyrbfm" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	3 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/fisi1/cwjsss" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	4 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/p3j9w/bqgwbg" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	5 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/krxsy/kjzanh" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	6 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/sjlpo/uzqyoe" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	7 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/o91bc/cdbrqo" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	8 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/lv6i9/iskeku" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>',
+	9 : '<div style="position:relative;padding-bottom:56.250%;"><iframe src="https://streamable.com/s/lower/lmnslp" frameborder="0" width="100%" height="100%" style="position:absolute;"></iframe></div>'
+}
+
+const MIN_WORDS = 10;
+
+document.getElementById('generate').onclick = function () {
+	var input = document.getElementById("in").value;
+	clearData();
+	set("title", input);
+	set("info", date());
+	if (user_words.length >= MIN_WORDS) {
+		var score = ratingSong(user_words);
+		set("review", 'According to Anthony Fantano, the internet\'s busiest music nerd, </br>these lyrics have a score of <span style="font-weight:bold">' + score + '</span>.');
+		set("video", VIDEOS[score]);
+	} else {
+		set("review", "Please write at least " + MIN_WORDS + " words.");
+	}
+}
+
+function textToWords(text) {
+	return text.replace( /\n/g, " " ).split( " " );
+}
+
+function ratingSong(user_words) {
+	var most_similar_song = "";
+	var max_similar_ranking = 0;
+	for (const [name, lyrics] of Object.entries(TEXT)) {
+		var ranking = similarity(textToWords(lyrics), user_words);
+		if (ranking > max_similar_ranking) {
+			max_similar_ranking = ranking;
+			most_similar_song = name;
+		}
+	}
+	if (max_similar_ranking == 0) {
+		return "NOT GOOD";
+	}
+	return SCORES[most_similar_song];
+}
+
+function similarity(s1, s2) {
+	var overlap = intersect(s1, s2);
+	return overlap.length/s1.length;
+}
+
+function intersect(a, b) {
+    var t;
+    if (b.length > a.length) t = b, b = a, a = t;
+    return a.filter(function (e) {
+        return b.indexOf(e) > -1;
+    });
+}
+
+function set(div, text) { 
+	document.getElementById(div).innerHTML = text; 
+}
+
+function date() {
+	var d = new Date();
+	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	return months[d.getMonth()] + " " +  d.getDate() + ", " + d.getFullYear();
+}
+
+function clearData() {
+	set("review", "");
+	set("video", "");
+	set("title", "");
+	set("info", "");
+}
+</script>
+
+<style type="text/css">
+body, html {
+	background: #FDF187;
+	color: #000000;
+	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 17px;
+}
+.topnav {
+    background-color: #000000;
+    padding: 14px 0 14px 0;
+}
+.topnav a {
+	display: inline-block;
+	min-width: 32%;
+	color: #f2f2f2;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+}
+.topnav a:hover {
+	text-decoration: underline;
+}
+.noHover {
+	text-decoration: none !important;
+}
+.container {
+	margin: 40pt 100pt 0 100pt;
+}
+#left {
+	float: left;
+}
+#right {
+	float: right;
+}
+textarea {
+	height: 200px;
+	width: 400px;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+textarea:focus {
+    border: 2px solid #555;
+}
+button {
+	margin-top: 10pt;
+	padding: 13px 26px;
+	text-transform: uppercase;
+	font-weight: 600;
+	color: #fff;
+	background-color: #272727;
+	border: none;
+}
+button:hover {
+	cursor: pointer;
+	background-color: #474747;
+}
+#out {
+	background-color: #fff;
+	min-width: 500px;
+    padding: 20px;
+    border: 3px solid #000;
+}
+#title {
+	font-size: 28px;
+	font-weight: 900;
+	margin-bottom: 10px;
+}
+#info {
+	background-color: #fcf281;
+	margin-bottom: 10px;
+}
+#video {
+	margin-bottom: 10px;
+}
+</style>
+</html>

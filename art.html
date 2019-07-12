@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Joyce Y. Chen</title>
+    <meta name="description" content="Joyce Y. Chen portfolio. MIT grad.">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="assets/main.css" />
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900" rel="stylesheet"> 
+    
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107524296-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
+
+    gtag('config', 'UA-107524296-1');
+    </script>
+</head>
+<header></header>
+
+<body>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/image-data.js"></script>
+    <script src="assets/main.js"></script>
+   
+    <script>
+    var subList = ["Pencil", "Pastel", "Paper",  "Strobe", "HSV"];
+
+    loadHeader("art", subList);
+    loadFooter();
+
+    createSections(artImages);
+    var sectionCount = [4, 2, 2, 3, 2];
+
+    $(document).scroll(function () {
+        var position = $(document).scrollTop(); 
+        var sectionH = 570;
+
+        var numSection = [];
+        sectionCount.reduce(function(a,b,i) { return numSection[i] = a+b; },0);
+
+        if (position >= 0 && position <= sectionH*numSection[0]*0.9) {
+            $(".active").removeClass("active");
+            $("#subbar-1").addClass("active");
+        } else if (position >= sectionH*numSection[0]*0.9 && position <= sectionH*numSection[1]*0.9) {
+            $(".active").removeClass("active");
+            $("#subbar-2").addClass("active");
+        } else if (position >= sectionH*numSection[1]*0.9 && position <= sectionH*numSection[2]*0.9) {
+            $(".active").removeClass("active");
+            $("#subbar-3").addClass("active");
+        } else if (position >= sectionH*numSection[2]*0.9 && position <= sectionH*numSection[3]*0.9) {
+            $(".active").removeClass("active");
+            $("#subbar-4").addClass("active");
+        } else if (position >= sectionH*numSection[3]*0.9) {
+            $(".active").removeClass("active");
+            $("#subbar-5").addClass("active");
+        } else {
+            $(".active").removeClass("active");  
+        }
+    });
+    </script>
+
+</body>
+
+<footer></footer>
+</html>

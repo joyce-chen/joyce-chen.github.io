@@ -1,0 +1,371 @@
+<!doctype html>
+<meta charset="UTF-8">
+<title>HURRY!</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+<style>
+body {
+	margin: 0;
+	overflow: hidden;
+}
+</style>
+<script>
+const NUMBERS = {
+	0 : "ZERO",
+	1 : "ONE",
+	2 : "TWO",
+	3 : "THREE",
+	4 : "FOUR",
+	5 : "FIVE",
+	6 : "SIX",
+	7 : "SEVEN",
+	8 : "EIGHT",
+	9 : "NINE",
+	10 : "TEN",
+	11 : "ELEVEN",
+	12 : "TWELVE",
+	13 : "THIRTEEN",
+	14 : "FOURTEEN",
+	15 : "FIFTEEN",
+	16 : "SIXTEEN",
+	17 : "SEVENTEEN",
+	18 : "EIGHTEEN",
+	19 : "NINETEEN",
+	20 : "TWENTY",
+	21 : "TWENTY-ONE",
+	22 : "TWENTY-TWO",
+	23 : "TWENTY-THREE",
+	24 : "TWENTY-FOUR",
+	25 : "TWENTY-FIVE",
+	26 : "TWENTY-SIX",
+	27 : "TWENTY-SEVEN",
+	28 : "TWENTY-EIGHT",
+	29 : "TWENTY-NINE",
+	30 : "THIRTY",
+	31 : "THIRTY-ONE",
+	32 : "THIRTY-TWO",
+	33 : "THIRTY-THREE",
+	34 : "THIRTY-FOUR",
+	35 : "THIRTY-FIVE",
+	36 : "THIRTY-SIX",
+	37 : "THIRTY-SEVEN",
+	38 : "THIRTY-EIGHT",
+	39 : "THIRTY-NINE",
+	40 : "FORTY",
+	41 : "FORTY-ONE",
+	42 : "FORTY-TWO",
+	43 : "FORTY-THREE",
+	44 : "FORTY-FOUR",
+	45 : "FORTY-FIVE",
+	46 : "FORTY-SIX",
+	47 : "FORTY-SEVEN",
+	48 : "FORTY-EIGHT",
+	49 : "FORTY-NINE",
+	50 : "FIFTY",
+	51 : "FIFTY-ONE",
+	52 : "FIFTY-TWO",
+	53 : "FIFTY-THREE",
+	54 : "FIFTY-FOUR",
+	55 : "FIFTY-FIVE",
+	56 : "FIFTY-SIX",
+	57 : "FIFTY-SEVEN",
+	58 : "FIFTY-EIGHT",
+	59 : "FIFTY-NINE",
+	60 : "SIXTY",
+}
+
+function setup() {
+	reset();
+}
+
+var state = 'start'; // start -> play -> end/fail
+var debug = false;
+var textHeight = 30*4/3;
+var tries = 1;
+var you;
+var powers = [];
+
+function reset() {
+	createCanvas(windowWidth, windowHeight);
+	background(0);
+	textFont('Helvetica');
+	textSize(30);
+	you = new Person();
+	for (var i = 0; i < 36; i++) {
+    	powers.push(new Power(you.val));
+	}
+	frameRate(100);
+}
+
+function draw() {
+	if (state == 'play') {
+		background(0);
+		timer();
+		you.render();
+		for (var i = 0; i < powers.length; i++) {
+		    if (you.hit(powers[i])) {
+		    	you.update(powers[i].val);
+		    }
+		    powers[i].render();
+		    powers[i].update();
+		    if (powers[i].offscreen()) {
+		    	powers[i] = new Power(you.val);
+			}
+		}
+
+		if (keyIsDown(RIGHT_ARROW)) {
+			if (you.pos.x < width - 15) {
+				if (you.val > 50) {
+					you.pos.x += 2;
+				} else if (you.val > 40) {
+					you.pos.x += 3;
+				} else if (you.val > 30) {
+					you.pos.x += 4;
+				} else {
+					you.pos.x += 5;
+				}
+			}
+		}
+		if (keyIsDown(LEFT_ARROW)) {
+			if (you.pos.x > 15) {
+				if (you.val > 50) {
+					you.pos.x -= 2;
+				} else if (you.val > 40) {
+					you.pos.x -= 3;
+				} else if (you.val > 30) {
+					you.pos.x -= 4;
+				} else {
+					you.pos.x -= 5;
+				}
+			}
+		}
+		if (keyIsDown(UP_ARROW)) {
+			if (you.pos.y > 15) {
+				if (you.val > 50) {
+					you.pos.y -= 2;
+				} else if (you.val > 40) {
+					you.pos.y -= 3;
+				} else if (you.val > 30) {
+					you.pos.y -= 4;
+				} else {
+					you.pos.y -= 5;
+				}
+			}
+		}
+		if (keyIsDown(DOWN_ARROW)) {
+			if (you.pos.y < height - 15) {
+				if (you.val > 50) {
+					you.pos.y += 2;
+				} else if (you.val > 40) {
+					you.pos.y += 3;
+				} else if (you.val > 30) {
+					you.pos.y += 4;
+				} else {
+					you.pos.y += 5;
+				}
+			}
+		}
+
+		if (you.val == 60) {
+			state = 'end';
+		}
+	} else if (state == 'start') {
+		start();
+	} else if (state == 'end') {
+		end();
+	} else if (state == 'fail') {
+		fail();
+	}
+}
+
+var time = 60;
+
+function timer() {
+	strokeWeight(1);
+	stroke(color(255,0,0));
+	fill(0);
+	rect(20, 20, 100, textHeight);
+
+	fill(color(255,0,0));
+	text(time, 55, 20 + textHeight*3/4);
+	noStroke();
+
+	if (frameCount % 60 == 0 && time > 0) {
+		time --;
+	}
+	if (time == 0) {
+		state = 'fail';
+	}
+}
+
+function fail() {
+	background(0);
+	fill(255);
+	text("You're ", width/4, height/4);
+	fill(color(255,0,0));
+	text(you.text, width/4 + textWidth("You're "), height/4);
+	fill(255);
+	text("seconds.", width/4 + textWidth("You're " + you.text + " "), height/4);
+	text("\n\nYou did not complete your task.\n\n\n\nPress ENTER to try again.",  width/4, height/4);
+}
+
+function start() {
+	background(0);
+	fill(255);
+	text("You're ", width/4, height/4);
+	fill(color(255,0,0));
+	text("ZERO", width/4 + textWidth("You're "), height/4);
+	fill(255);
+	text("seconds.", width/4 + textWidth("You're ZERO "), height/4);
+	text("\n\nYou become what you touch.", width/4, height/4);
+	text("\n\n\n\nTry to become ", width/4, height/4);
+	fill(color(255,0,0));
+	text("\n\n\n\nSIXTY", width/4 + textWidth("Try to become "), height/4);
+	fill(255);
+	text("\n\n\n\nwithin the minute.", width/4 + textWidth("Try to become SIXTY "), height/4);
+	text("\n\n\n\n\n\n\n\nUse the ARROW KEYS to move around.\n\nPress ENTER to begin your journey.",  width/4, height/4);
+}
+
+function end() {
+	background(0);
+	fill(255);
+	text("Congratulations, my little ", width/4, height/4);
+	fill(color(255,0,0));
+	text("ZERO", width/4 + textWidth("Congratulations, my little "), height/4);
+	fill(255);
+	text("!", width/4 + textWidth("Congratulations, my little ZERO"), height/4);
+	text("\n\nYou've become a full ", width/4, height/4);
+	fill(color(255,0,0));
+	text("\n\nMINUTE", width/4 + textWidth("You've become a full "), height/4);
+	fill(255);
+	text("\n\nand just in time!", width/4 + textWidth("You've become a full MINUTE "), height/4);
+	if (tries == 1 && time == 1) {
+		text("\n\n\n\nYou did it in " + tries + " try with " + time + " second left to spare.", width/4, height/4);
+	} else if (tries == 1) {
+		text("\n\n\n\nYou did it in " + tries + " try with " + time + " seconds left to spare.", width/4, height/4);
+	} else if (time == 1) {
+		text("\n\n\n\nYou did it in " + tries + " tries with " + time + " second left to spare.", width/4, height/4);
+	} else {
+		text("\n\n\n\nYou did it in " + tries + " tries with " + time + " seconds left to spare.", width/4, height/4);
+	}
+	text("\n\n\n\n\n\n\nPress ENTER to restart your journey.", width/4, height/4);
+}
+
+function randInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function Person() {
+	this.pos = createVector(width/2, height/2);
+	this.val = 0;
+	this.text = NUMBERS[this.val];
+	this.w = textWidth(this.text);
+	this.h = textHeight;
+	this.render = function() {
+		if (debug) {
+			strokeWeight(2);
+			fill(100);
+			stroke(100);
+			beginShape();
+			vertex(this.pos.x - this.w/2 - 5, this.pos.y - this.h/2);
+			vertex(this.pos.x + this.w/2 - 5, this.pos.y - this.h/2);
+			vertex(this.pos.x + this.w/2 - 5, this.pos.y + this.h/2);
+			vertex(this.pos.x - this.w/2 - 5, this.pos.y + this.h/2);
+			endShape(CLOSE);
+		}
+		push();
+		noStroke();
+		fill(255,0,0);
+		textAlign(CENTER, CENTER);
+		translate(this.pos.x, this.pos.y);
+		text(this.text, -this.w/2, 0, this.w, this.h);
+		pop();
+	}
+	this.hit = function(power) {
+		var dx = abs(this.pos.x - power.pos.x);
+		var dy = abs(this.pos.y - power.pos.y);
+		return (dx < this.w/2 && dy < this.h/2);
+	}
+	this.update = function(number) {
+		this.val = number;
+		this.text = NUMBERS[this.val];
+		this.w = textWidth(this.text);
+	}
+}
+
+function spawn() {
+	var locations = ['top', 'bottom', 'left', 'right'];
+	var position = locations[Math.floor(Math.random() * locations.length)];
+	if (position == 'top') {
+		var x = randInt(0, width);
+		var y = randInt(0, 20);
+	} else if (position == 'bottom') {
+		var x = randInt(0, width);
+		var y = randInt(height-20, height);
+	} else if (position == 'left') {
+		var x = randInt(0, 20);
+		var y = randInt(0, height);
+	} else {
+		var x = randInt(width-20, width);
+		var y = randInt(0, height);
+	}
+	return createVector(x, y);
+}
+
+function Power(state) {
+	this.pos = spawn();
+	this.val = randInt(Math.max(0, state - 13), Math.min(state + 12, 60));
+	this.text = NUMBERS[this.val];
+	this.w = textWidth(this.text);
+	this.h = textHeight;
+	this.vel = p5.Vector.random2D();
+	this.update = function() {
+		this.pos.add(this.vel);
+	}
+	this.render = function() {
+		if (debug) {
+			strokeWeight(2);
+			fill(100);
+			stroke(100);
+			beginShape();
+			vertex(this.pos.x - this.w/2 - 5, this.pos.y - this.h/2);
+			vertex(this.pos.x + this.w/2 - 5, this.pos.y - this.h/2);
+			vertex(this.pos.x + this.w/2 - 5, this.pos.y + this.h/2);
+			vertex(this.pos.x - this.w/2 - 5, this.pos.y + this.h/2);
+			endShape(CLOSE);
+		}
+		push();
+		noStroke();
+		fill(255);
+		textAlign(CENTER, CENTER);
+		translate(this.pos.x, this.pos.y);
+		text(this.text, -this.w/2, 0, this.w, this.h);
+		pop();
+	}
+	this.offscreen = function() {
+		return (this.pos.x > width || this.pos.x < 0 || this.pos.y > height || this.pos.y < 0);
+	}
+}
+
+function keyPressed() {
+	if (keyCode == ENTER) {
+		if (state == 'start') {
+			state = 'play';
+		}
+		if (state == 'end') {
+			tries = 1;
+			state = 'start';
+			powers = [];
+			time = 60;
+			reset();
+		}
+		if (state == 'fail') {
+			tries += 1;
+			state = 'start';
+			powers = [];
+			time = 60;
+			reset();
+		}
+	}
+}
+
+</script>

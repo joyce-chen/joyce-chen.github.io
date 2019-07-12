@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wholesome Lipogram - Insulting Transgram</title>
+	<meta charset = "UTF-8">
+
+</head>
+
+<body onload="show_poems();" cz-shortcut-listen="true">
+
+<div class="container">
+	<div id="left" onmouseover="show(this.id)"><span id="left-poem"></span></div>
+	<div id="left-info">
+	    <b style="font-size:30pt;">"no u"
+	    </b><br><br>
+	    - Joyce Chen
+	</div>
+
+	<div id="middle" onmouseover="show(this.id)"></div>
+
+	<div id="right" onmouseover="show(this.id);"><span id="right-poem"></span></div>
+	<div id="right-info">
+	    <b style="font-size:30pt;">"must u?"
+	    </b><br><br>
+	    - Joyce Chen
+	</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+const POSITIVE = [ 
+	"Always on my mind.",
+	"Looking great today.",
+	"A smart cookie.",
+	"Impeccable manners.",
+	"Strong.",
+	"Talented.",
+	"Refreshing.",
+	"An awesome friend.",
+	"Kind.",
+	"Considerate.",
+	"Brave.",
+	"The bee's knees.",
+	"Making a difference.",
+	"Impressive.",
+	"A great listener.",
+	"Cool.",
+	"A blast.",
+	"Lovely beyond imagination.",
+	"Inspiring.",
+	"Bright as a shining star."
+]
+
+const NEGATIVE = [
+	"Unfunny.",
+	"Ugly.",
+	"Dumb.",
+	"Unsightly.",
+	"Utterly repulsive.",
+	"Unbearably pompous.",
+	"Untrustworthy.",
+	"Obnoixous.",
+	"Dysfunctional.",
+	"Undoing evolution.",
+	"Just stupid.",
+	"Useless rubbish.",
+	"Dunce.",
+	"Faulty lightbulb.",
+	"Shut your mouth.",
+	"Insult upon humanity.",
+	"Catalogued under 'gullible'.",
+	"Unlikeable.",
+	"Exhausting nature.",
+	"Unnerving."
+]
+
+function rand_index(len) {
+    "use strict";
+    return Math.floor(Math.random() * len);
+}
+
+var numSentences = 5;
+
+function show_poems() {
+	show_left();
+	show_right();
+}
+
+function show_left() {
+	"use strict";
+    let left = document.getElementById('left-poem');
+    let leftSentences = POSITIVE.slice();
+
+    while (leftSentences.length > numSentences) {
+    	leftSentences.splice(rand_index(leftSentences.length), 1);
+    }
+
+    let leftPoem = leftSentences.join('<br>');
+    left.innerHTML = `"${leftPoem}"`;
+}
+
+function show_right() {
+	"use strict";
+	let right = document.getElementById('right-poem');
+    let rightSentences = NEGATIVE.slice();
+
+	while (rightSentences.length > numSentences) {
+      rightSentences.splice(rand_index(rightSentences.length), 1);
+    }
+
+    let rightPoem = rightSentences.join('<br>');
+    right.innerHTML = `"${rightPoem}"`;
+}
+
+function show(id) {
+	console.log(id);
+	if (id == 'left') {
+		document.getElementById('left-poem').style.display = "table-cell";
+		document.getElementById('left-info').style.display = "initial";
+
+		document.getElementById('right-poem').style.display = "none";
+		document.getElementById('right-info').style.display = "none";
+	} else if (id == 'right') {
+		document.getElementById('left-poem').style.display = "none";
+		document.getElementById('left-info').style.display = "none";
+
+		document.getElementById('right-poem').style.display = "table-cell";
+		document.getElementById('right-info').style.display = "initial";
+	} else {
+		document.getElementById('left-poem').style.display = "table-cell";
+		document.getElementById('left-info').style.display = "initial";
+
+		document.getElementById('right-poem').style.display = "table-cell";
+		document.getElementById('right-info').style.display = "initial";
+	}
+}
+
+show_poems();
+setInterval(show_poems, 10000);
+</script>
+
+<style type="text/css">
+body, html {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	background: #FFFFFF;
+	color: #000000;
+	font-family: Optima, sans-serif;
+	font-size: 15pt;
+	overflow: hidden;
+}
+a {
+	color: #000080;
+	text-decoration: underline;
+}
+.container {
+	display: flex;
+	height: 100%;
+}
+.container > div {
+	flex: 1;
+}
+#left {
+	width: 49%;
+	height: 100%;
+	text-align: center; 
+	display: table;
+}
+#middle {
+	width: 2%;
+	height: 100%;
+	background: #555555;
+}
+#right {
+	width: 49%;
+	height: 100%;
+	background: #000000;
+	color: #FFFFFF;
+	text-align: center; 
+	display: table;
+}
+span {
+	font-size: 20pt;
+	display: table-cell;
+	vertical-align: middle;
+}
+#left-info {
+	position: absolute;
+	bottom: 20%;
+	left: 30%;
+    text-align: center; 
+    font-size: 15pt;
+}
+#right-info {
+	position: absolute;
+	bottom: 20%;
+	right: 8%;
+    text-align: center; 
+    font-size: 15pt;
+    color: #FFFFFF;
+}
+
+</style>
+
+</html>

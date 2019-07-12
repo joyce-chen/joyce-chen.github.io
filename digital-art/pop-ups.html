@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pop Up!</title>
+	<meta charset="UTF-8">
+</head>
+
+<body cz-shortcut-listen="true">
+
+<div class="center" id="name">
+	<b style="font-size: 30px;">Bombarding (but Catchy) Slogans,</b> by Joyce Chen. <br><br>
+	Based on Upstart by <a href="http://nickm.com/">Nick Montfort</a>. <br>
+	<i style="font-size: 15px;">Images from Unsplash, Pexel, and iStock. Fullscreen recommended.</i>
+</div>
+
+<div id='pop-area'>
+	<div id="modal-back">
+		<div id="picture-back">
+			<img src="" width="350" height=auto id="image-back" class="center"></img>
+		</div>
+		<div id="text-back"></div>
+	</div>
+	<div id="modal-front">
+		<div id="picture-front">
+			<img src="" width="350" height=auto id="image-front" class="center"></img>
+		</div>
+		<div id="text-front"></div>
+	</div>
+</div>
+
+<script>
+var OPTIONS = [
+			["McDonald\'s",     "I\'m lovin\' it!"],
+			["Burger King",     "Have it your way."],
+			["KFC",             "Finger lickin\' good."],
+			["Subway",          "Eat fresh."],
+			["Skittles",        "Taste the rainbow."],
+			["Rice Krispies",   "Snap, Crackle, and Pop!"],
+			["Frosted Flakes",  "They\'re gr-r-r-reat!"],
+			["Allstate",        "You\'re in good hands with ---."],
+			["Walmart",         "Save money. Live better."],
+			["Disney Parks",    "Where dreams come true."],
+			["Dunkin\' Donuts", "America runs on ---."],
+			["Nike",            "Just do it!"],
+			["Ford",            "Go further."],
+			["Tesco",           "Every little helps."],
+			["Apple",           "Think different."],
+			["Adidas",          "Impossible is nothing."],
+			["L\'Oreal Paris",  "Because you're worth it."],
+			["M&M\'s",          "Melts in your mouth, not in your hand."],
+			["Campbell\'s",     "Mmm mmm good!"],
+			["BMW",             "The ultimate driving machine."],
+			["Bounty",          "The quicker picker upper."],
+			["State Farm",      "Like a good neighbor, --- is there."],
+			["Nikon",           "At the heart of image."],
+			["Levi\'s",         "Quality never goes out of style."],
+			["Kay",             "Every kiss begins with ---."],
+			["Volkswagen",      "Think small."],
+			["Capital One",     "What\'s in your wallet?"],
+			["GE",              "Imagination at work."],
+			["3M",              "Innovation."],
+			["IMAX",            "Think big."],
+			["Trix",            "Silly Rabbit, --- are for kids."],
+			["Sour Patch Kids", "First they\'re sour, then they\'re sweet."]
+			];
+var IMAGES = ["https://images.unsplash.com/photo-1428660386617-8d277e7deaf2?w=1200", //food
+			"https://images.unsplash.com/photo-1460306855393-0410f61241c7?w=1200", //food
+			"https://images.unsplash.com/photo-1501212483536-b333ee05cac8?w=1200", //food
+			"https://media.istockphoto.com/photos/breakfast-feast-picture-id531306158?s=1200",
+			"https://media.istockphoto.com/photos/pouring-milk-into-the-bowl-with-flakes-picture-id488636776",
+			"https://images.unsplash.com/photo-1506719040632-7d586470c936?w=1200", //car
+			"https://media.istockphoto.com/photos/every-mile-is-worth-your-while-picture-id628504834",
+			"https://media.istockphoto.com/photos/male-it-specialist-holds-laptop-and-discusses-work-with-female-server-picture-id802301404",
+			"https://media.istockphoto.com/photos/smiling-man-texting-at-night-picture-id695831248",
+			"https://media.istockphoto.com/photos/aerial-view-on-red-car-on-the-road-near-tea-plantation-picture-id641294046",
+			"https://media.istockphoto.com/photos/car-driving-on-a-road-by-sea-picture-id879766344",
+			"https://media.istockphoto.com/photos/studio-shot-of-young-beautiful-woman-picture-id699862786",
+			"https://media.istockphoto.com/photos/loving-man-putting-necklace-on-girlfriend-picture-id637985144",
+			"https://media.istockphoto.com/photos/red-haired-woman-with-voluminous-shiny-and-curly-hairstyleflying-hair-picture-id849234512",
+			"https://media.istockphoto.com/photos/eating-delicious-donuts-picture-id637493080",
+			"https://images.unsplash.com/photo-1443916568596-df5a58c445e9?w=1200", //generic
+			"https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=1200", //generic
+			"https://images.unsplash.com/photo-1503346463167-72fcaee0ecf2?w=1200", //generic
+			"https://images.unsplash.com/photo-1496867557017-559adb93b339?w=1200", //nature
+			"https://images.unsplash.com/photo-1469131792215-9c8aaff71393?w=1200", //generic
+			"https://images.unsplash.com/photo-1460306855393-0410f61241c7?w=1200", //food
+			"https://images.unsplash.com/photo-1469457245180-8b90ba0fdfa2?w=1200", //car
+			"https://images.unsplash.com/photo-1506719040632-7d586470c936?w=1200", //car
+			"https://images.unsplash.com/photo-1502161254066-6c74afbf07aa?w=1200", //car
+			"https://images.unsplash.com/reserve/YFdIoUsRJCAehcoUnQaS_Straw.jpg?w=1200", //food
+			"https://images.unsplash.com/photo-1490567674331-72de84794694?w=1200", //food
+			"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?w=1200&cs=tinysrgb", //food
+			"https://images.pexels.com/photos/407237/pexels-photo-407237.jpeg?w=1200&cs=tinysrgb", //generic
+			"https://images.pexels.com/photos/541518/pexels-photo-541518.jpeg?w=1200&cs=tinysrgb", //generic
+			"https://images.pexels.com/photos/826349/pexels-photo-826349.jpeg?w=1200&cs=tinysrgb", //tech
+			"https://images.pexels.com/photos/8639/light-car-inside-black.jpg?w=12000&cs=tinysrgb", //car
+			"https://images.pexels.com/photos/57645/pexels-photo-57645.jpeg?w=1200&cs=tinysrgb", //car
+			"https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?w=1200&cs=tinysrgb", //car
+			"https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?w=1200&cs=tinysrgb", //food
+			"https://images.pexels.com/photos/458766/pexels-photo-458766.jpeg?w=1200&cs=tinysrgb"
+			];
+var FONTS = ['Arial, Helvetica, sans-serif',
+			'Arial Black, Gadget, sans-serif',
+			'Impact, Charcoal, sans-serif',
+			'Lucida Sans Unicode, Lucida Grande, sans-serif',
+			'Tahoma, Geneva, sans-serif',
+			'Trebuchet, Trebuchet MS, sans-serif',
+			'Verdana, Geneva, sans-serif',
+			'Helvetica Neue, Helvetica, Arial, sans-serif',
+			'Montserrat, sans-serif',
+			'Indie Flower, cursive',
+			'Lobster, cursive',
+			'Libre Baskerville, serif',
+			'Quicksand, sans-serif',
+			'Abril Fatface, cursive',
+			'Pacifico, cursive',
+			'Shadows Into Light, cursive',
+			'Gloria Hallelujah, cursive',
+			'Roboto, sans-serif',
+			'Open Sans, sans-serif',
+			'Calligraffitti, cursive'
+			];
+var DARK = ["red", "salmon", "crimson",
+			"teal", "navy",  "dodgerblue",
+			"green", "limegreen", "olive", "mediumaquamarine",
+			"orange", "tomato", "gold", 
+			"purple", "orchid", 
+			"black", "darkgray", "slategray",
+			"brown", "maroon", "chocolate", "tan"
+			];
+var LIGHT = ["yellow", "peachpuff", "aquamarine", "turquoise",
+			"palegreen", "lavender", "plum"];
+var COLORS = [DARK, LIGHT];
+var DIRECTIONS = ['animatetop', 'animatebottom', 'animateright', 'animateleft', '', '', ''];
+
+
+function randIndex(len) {
+	"use strict";
+	return Math.floor(Math.random() * len);
+}
+
+function randomInt(start, end) {
+	"use strict";
+	return Math.floor(Math.random() * end) + start;
+}
+
+var count = 0;
+
+function removeAnimation() {
+	"use strict";
+	var previous = count - 1;
+	var modal = document.getElementById('modal'+previous);
+	modal.style.animationName = '';
+}
+
+function update() {
+	"use strict";
+	var modalName, pictureName, imageName, textName;
+	var posX, posY;
+	var areadiv, modal, imgbkgd, imgdiv, textdiv;
+	var company, slogan, font, color, text;
+	
+	areadiv = document.getElementById('pop-area');
+	posX = randomInt(-350, document.body.clientWidth - 450);
+	posY = randomInt(0, document.body.clientHeight - 100);
+
+	modalName = "modal" + count;
+	pictureName = "picture" + count;
+	imageName = "image" + count;
+	textName = "text" + count;
+	
+	var d1 = '<div class="modal" style="zIndex:'+count+'; left:'+posX+'px; top:'+posY+'px;" id="'+modalName+'">';
+	var d2 = '<div class="picture" id="'+pictureName+'">';
+	var d3 = '<img src="" width="350" height=auto class="center" id="'+imageName+'"></img>';
+	var d4 = '</div><div class="text" id="'+textName+'"></div></div>';
+
+	areadiv.innerHTML += d1+d2+d3+d4;
+
+	modal = document.getElementById(modalName);
+	imgbkgd = document.getElementById(pictureName);
+	imgdiv = document.getElementById(imageName);
+	textdiv = document.getElementById(textName);
+
+	// Add image
+	var image = IMAGES[randIndex(IMAGES.length)];
+	imgdiv.src = image;
+
+	// Add text
+	company = randIndex(OPTIONS.length);
+	slogan = randIndex(OPTIONS.length);
+	if (slogan === company) { 
+		slogan = randIndex(OPTIONS.length); 
+	}
+	text = OPTIONS[company][0] + '<br>' + OPTIONS[slogan][1];
+	if (text.includes("---")) {
+		text = text.replace("---", OPTIONS[company][0]);
+	}
+	textdiv.innerHTML = text;
+
+	// Text font, text color, and modal backgound color
+	font = FONTS[randIndex(FONTS.length)];
+	var b = randIndex(COLORS.length);
+	var c = randIndex(COLORS[b].length);
+	color = COLORS[b][c];
+	textdiv.style.fontFamily = font;
+	textdiv.style.backgroundColor = color;
+	imgbkgd.style.backgroundColor = color;
+	if (b == 1) {
+		textdiv.style.color = "black";
+	} else {
+		textdiv.style.color = "white";
+	}
+
+	// Animation direction
+	var direction = DIRECTIONS[randIndex(DIRECTIONS.length)];
+	modal.style.animationName = '';
+
+	// Increase for new modal
+	count += 1;
+}
+
+setInterval(update, 2000);
+setInterval(removeAnimation, 2100);
+</script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Calligraffitti|Gloria+Hallelujah|Indie+Flower|Libre+Baskerville|Lobster|Montserrat|Open+Sans|Pacifico|Quicksand|Roboto|Shadows+Into+Light" rel="stylesheet"> 
+
+
+<style type="text/css">
+body {
+	font-family: Helvetica, 'Nimbus Sans L', 'Liberation Sans', Arial, sans-serif;
+	padding: 14px 28px 0 28px; 
+	background-color: white;
+	overflow: hidden;
+}
+#name {
+	width: 100%;
+	text-align: center; 
+	font-size: 20px; 
+	padding: 14px 0 14px 0; 
+	margin-bottom: 52px; 
+	background-color: white; 
+}
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#pop-area {
+	margin: auto;
+	width: 50%;
+	position: relative;
+}
+.picture {
+	padding: 32px 16px;
+	background-color: white;
+}
+.text {
+	padding: 16px 16px;
+	font-size: 40px;
+	text-align: center;
+	color: white;
+	background-color: white;
+}
+.modal {
+	position: absolute;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888888;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	animation-duration: 0.4s;
+}
+
+@keyframes animatetop {
+	from {top: -300px; opacity: 0}
+	to { opacity: 1}
+} 
+@keyframes animatebottom {
+	from {top: 300px; opacity: 0}
+	to {opacity: 1}
+} 
+@keyframes animateright {
+	from {right: 800px; opacity: 0}
+	to { opacity: 1}
+} 
+@keyframes animateleft {
+	from {left: -800px; opacity: 0}
+	to {opacity: 1}
+} 	
+</style>
+
+
+</body>
+</html>

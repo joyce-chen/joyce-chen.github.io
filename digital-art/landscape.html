@@ -1,0 +1,212 @@
+<!doctype html>
+<meta charset="UTF-8">
+<title>Joy Division</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+<style>
+body {
+	margin: 0;
+	overflow: hidden;
+}
+</style>
+<script>
+const albumWidth = 580;
+const albumHeight = 650;
+
+const xMin = 400;
+const yMin = 20;
+
+const numLines = 80;
+const numPoints = 100;
+
+const xOffset = albumWidth/10;
+const yOffset = albumHeight/10;
+const dx = (albumWidth - xOffset*2)/numPoints;
+const dy = (albumHeight - yOffset*2)/numLines;
+
+const xLines = xMin + xOffset;
+const yLines = yMin + yOffset;
+
+var LEFT_LINES = [];
+var RIGHT_LINES = [];
+var CENTER_LINES = [];
+
+function setup() {
+	reset();
+}
+
+function reset() {
+	createCanvas(displayWidth, displayHeight);
+	background(0);
+	setupLines(RIGHT_LINES, xLines + dx*numPoints, yLines);
+	setupLines(LEFT_LINES, xLines - dx*numPoints, yLines);
+	setupLines(CENTER_LINES, xLines, yLines);
+	drawLines(CENTER_LINES);
+	textFont('Helvetica');
+	textSize(30);
+}
+
+function draw() {
+	noFill();
+	stroke(255);
+	strokeWeight(1);
+	rect(xMin, yMin, albumWidth, albumHeight);
+	if (RIGHT_LINES[0].length == 0) {
+		setupLines(RIGHT_LINES, xLines + dx*numPoints, yLines);
+	}
+	if (LEFT_LINES.length == numLines) {
+		if (LEFT_LINES[LEFT_LINES.length - 1].length == 0) {
+			setupLines(LEFT_LINES, xLines - dx*numPoints, yLines);
+		}
+	}
+	clearScreen();
+    drawLines(CENTER_LINES);
+    noStroke();
+    fill(255);
+    text("JOYCE CHEN", xMin + albumWidth/2, yMin + albumHeight - yOffset/2);
+}
+
+function setupLines(LINE_LIST, x, y) {
+	for (var j = 0; j < numLines; j++) {
+		LINE_LIST[j] = makeLine(x, y + dy*j);
+	}
+}
+
+function makeLine(x, y) {
+	var points = [];
+
+	var mx = x - xOffset + albumWidth/2;
+	var numModes = randInt(1, 4);
+	var mu = [];
+	var sigma = [];
+
+	for (var m = 0; m < numModes; m++) {
+		mu.push(rand(mx - 50, mx + 50));
+		sigma.push(randNormal(24, 30));
+	}
+
+	var w = y;
+	for (var i = 0; i <= numPoints; i++) {
+		var noise = 0;
+		for (var n = 0; n < numModes; n++) {
+			noise += normalPDF(x + dx*i, mu[n], sigma[n]);
+		}
+		var yy = 0.3*w + 0.7*(y - 600*noise + noise*Math.random()*200 + Math.random());
+		points.push([x + dx*i, yy]);
+		w = yy;
+	}
+	return points;
+}
+
+function drawLines(LINE_LIST) {
+	for (var l = 0; l < LINE_LIST.length; l++) {
+		fill(0);
+		stroke(255);
+		strokeWeight(1);
+		beginShape();
+		for (var p = 0; p < LINE_LIST[l].length; p++) {
+			curveVertex(LINE_LIST[l][p][0], LINE_LIST[l][p][1]);
+		}
+		endShape();
+	}
+}
+
+function randInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function rand(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
+function randNormal(mu, sigma) {
+	var sum = 0;
+	var n = 6;
+	for (var i = 0; i < n; i++) {
+		sum += rand(-1, 1);
+	}
+	return mu + sigma * sum/n;
+}
+
+function normalPDF(x, mu, sigma) {
+	var sigma2 = Math.pow(sigma, 2);
+	var numerator = Math.exp(-Math.pow((x - mu), 2) / (2 * sigma2));
+	var denominator = Math.sqrt(2 * Math.PI * sigma2);
+	return numerator/denominator;
+}
+
+function clearScreen() {
+	background(0);
+	noFill();
+	stroke(255);
+	strokeWeight(1);
+	rect(xMin, yMin, albumWidth, albumHeight);
+}
+
+function shiftPoints(LINE_LIST, xShift, yShift) {
+	for (var l = 0; l < LINE_LIST.length; l++) {
+		for (var p = 0; p < LINE_LIST[l].length; p++) {
+			LINE_LIST[l][p][0] += xShift * dx;
+			LINE_LIST[l][p][1] += yShift * -dy;
+		}
+	}
+	return LINE_LIST;
+}
+
+function keyPressed() {
+    if (keyCode === UP_ARROW) {
+    	// Remove the bottom, last line
+        CENTER_LINES.pop();
+        CENTER_LINES = shiftPoints(CENTER_LINES, 0, -1);
+        
+        // Add the top, first line
+        var newLine = makeLine(xLines, yLines);
+        CENTER_LINES.unshift(newLine);
+
+    } else if (keyCode === DOWN_ARROW) {
+    	// Remove the top, first line
+    	CENTER_LINES.shift();
+        CENTER_LINES = shiftPoints(CENTER_LINES, 0, 1);
+
+        // Add the bottom, last line
+        var newLine = makeLine(xLines, yLines + (numLines-1)*dy);
+        CENTER_LINES.push(newLine);
+        
+    } else if (keyCode === RIGHT_ARROW) {
+    	for (var l = 0; l < numLines; l++) {
+    		// Remove the leftmost, first point
+    		CENTER_LINES[l].shift();
+    	}
+
+    	CENTER_LINES = shiftPoints(CENTER_LINES, -1, 0);
+
+    	for (var l = 0; l < numLines; l++) {
+    		// Add to CENTER(last) from RIGHT(first)
+    		var newPoint = RIGHT_LINES[l][0];
+    		RIGHT_LINES[l].shift();
+    		CENTER_LINES[l].push(newPoint);
+    	}
+
+    	RIGHT_LINES = shiftPoints(RIGHT_LINES, -1, 0);
+
+    } else if (keyCode === LEFT_ARROW) {
+    	for (var l = 0; l < numLines; l++) {
+    		// Remove the rightmost, last point
+    		CENTER_LINES[l].pop();
+    	}
+
+		CENTER_LINES = shiftPoints(CENTER_LINES, 1, 0);
+
+    	for (var l = 0; l < numLines; l++) {
+    		// Add to CENTER(first) from LEFT(last)
+    		var newPoint = LEFT_LINES[l].pop();
+    		CENTER_LINES[l].unshift(newPoint);
+    	}
+
+    	LEFT_LINES = shiftPoints(LEFT_LINES, 1, 0);
+
+    } else if (keyCode === ENTER) {
+    	reset();
+    }
+}
+
+</script>
