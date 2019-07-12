@@ -250,7 +250,7 @@ var artImages = {
         title: "Joker",
         award: null,
         medium: "Colored construction paper",
-        caption: "I was exploring paper as a medium in a minimalist style. Inspired by Joker from watching The Dark Knight Rises."
+        caption: "I was exploring paper as a medium in a minimalist style. Source: Joker from watching The Dark Knight."
     },
     "bonfire": {
         source: "images/art/paper/bonfire.jpg",
@@ -259,7 +259,7 @@ var artImages = {
         title: "Bonfire",
         award: null,
         medium: "Colored construction paper",
-        caption: "I was exploring paper as a medium in a minimalist style. Inspired by Dark Souls."
+        caption: "I was exploring paper as a medium in a minimalist style. Source: Dark Souls."
     },
     "balloon-pop-images": balloonPopImages,
     "water-balloon-images": waterBalloonImages,
