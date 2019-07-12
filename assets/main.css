@@ -467,6 +467,13 @@ section {
   height: 50%;
 }
 
+.contact-cta {
+  display: flex; 
+  justify-content: center; 
+  align-content: center; 
+  margin: 10%;
+}
+
 /*-------------ANIMATION-----------------*/
 @keyframes fadein {
   from {opacity:0;}
@@ -528,7 +535,7 @@ section {
 
 
 
-@media (min-width: 525px) and (max-width: 784px) {
+@media (min-width: 661px) and (max-width: 784px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
@@ -692,7 +699,7 @@ section {
 
 
 
-@media (min-width: 0px) and (max-width: 524px) {
+@media (min-width: 0px) and (max-width: 660px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
@@ -772,6 +779,7 @@ section {
   }
 
   .intro-details {
+    width: 100%;
     font-size: var(--caption-size);
   }
 
@@ -922,7 +930,7 @@ section {
 
   .contact-text > object:nth-child(1) {
     flex: 1 1 auto;
-    width: 70%;
+    width: 100%;
   }
 
   .contact-text > div:nth-child(2) {
@@ -932,12 +940,14 @@ section {
   
   .contact-text > object:nth-child(3) {
     flex: 1 1 auto;
-    width: 70%;
+    width: 100%;
   }
 
-  .contact-text > div:nth-child(4) {
+  .contact-cta {
     flex: 1 1 auto;
     margin: 10%;
+    width: 100%;
   }
+
 
 }
