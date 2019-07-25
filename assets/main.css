@@ -120,7 +120,7 @@ animation: fadein 3s;*/
 }
 
 .logo:hover {
-  color: var(--select-color);
+  background-color: var(--select-color);
   cursor: pointer;
 }
 
@@ -571,6 +571,8 @@ section {
   }
 
   .logo {
+    width: 45px;
+    height: 45px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -579,6 +581,7 @@ section {
 
   .logo img {
     width: 45px;
+    height: 45px;
   }
 
   .menu {
@@ -586,6 +589,10 @@ section {
     display: flex;
     justify-content: center;
     align-content: center;
+  }
+
+  .menu:hover {
+    opacity: 0.5;
   }
 
   .menu img {
@@ -812,6 +819,10 @@ section {
     display: flex;
     justify-content: center;
     align-content: center;
+  }
+
+  .menu:hover {
+    opacity: 0.5;
   }
 
   .menu img {
