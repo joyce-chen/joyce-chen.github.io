@@ -501,7 +501,7 @@ section {
   Most of the Smartphones Mobiles (Portrait) (320px to 479px)
 */
 
-@media (min-width: 785px) and (max-width: 1110px) {
+@media only screen and (min-width: 785px) and (max-width: 1110px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
@@ -535,7 +535,7 @@ section {
 
 
 
-@media (min-width: 661px) and (max-width: 784px) {
+@media only screen and (min-width: 661px) and (max-width: 784px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
@@ -699,7 +699,7 @@ section {
 
 
 
-@media (min-width: 0px) and (max-width: 660px) {
+@media only screen and (min-width: 0px) and (max-width: 660px) {
   :root {
     --primary-color: white;
     --secondary-color: #f0f0f0;
