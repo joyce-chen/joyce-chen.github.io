@@ -27,19 +27,19 @@
     <script src="assets/main.js"></script>
    
     <script>
-    var subList = ["Pencil", "Pastel", "Paper",  "Strobe", "HSV"];
+    let subList = ["Pencil", "Pastel", "Paper",  "Strobe", "HSV"];
 
     loadHeader("art", subList);
     loadFooter();
 
-    createSections(artImages);
-    var sectionCount = [4, 2, 2, 3, 2];
+    createSections(ART_IMAGES);
+    let sectionCount = [4, 2, 2, 3, 2];
 
     $(document).scroll(function () {
-        var position = $(document).scrollTop(); 
-        var sectionH = 570;
+        let position = $(document).scrollTop(); 
+        let sectionH = 570;
 
-        var numSection = [];
+        let numSection = [];
         sectionCount.reduce(function(a,b,i) { return numSection[i] = a+b; },0);
 
         if (position >= 0 && position <= sectionH*numSection[0]*0.9) {

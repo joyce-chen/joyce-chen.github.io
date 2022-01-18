@@ -1,5 +1,5 @@
 // ----------------------- ART ------------------------
-var balloonPopImages = {
+const BALLOON_POP_IMAGES = {
     series_title: "Balloon Pop",
     category: "strobe",
     medium: "Strobe Photography",
@@ -44,7 +44,7 @@ var balloonPopImages = {
     }
 };
 
-var waterBalloonImages = {
+const WATER_BALLOON_IMAGES = {
     series_title: "Water Balloon",
     category: "strobe",
     medium: "Strobe Photography",
@@ -89,7 +89,7 @@ var waterBalloonImages = {
     }
 };
 
-var bulletImages = {
+const BULLET_IMAGES = {
     series_title: "Bullets",
     category: "strobe",
     medium: "Strobe Photography",
@@ -122,7 +122,7 @@ var bulletImages = {
     }
 };
 
-var milkDropImages = {
+const MILK_DROP_IMAGES = {
     series_title: "Milk Drop",
     category: "hsv",
     medium: "High Speed Video",
@@ -155,7 +155,7 @@ var milkDropImages = {
     }
 };
 
-var fireImages = {
+const FIRE_IMAGES = {
     series_title: "Fire",
     category: "hsv",
     medium: "High Speed Video",
@@ -188,7 +188,7 @@ var fireImages = {
     }
 };
 
-var artImages = {
+const ART_IMAGES = {
     "brandy": {
         source: "images/art/pencil/brandy.jpg",
         square: "images/art/pencil/brandy-square.jpg",
@@ -261,16 +261,16 @@ var artImages = {
         medium: "Colored construction paper",
         caption: "I was exploring paper as a medium in a minimalist style. Source: Dark Souls."
     },
-    "balloon-pop-images": balloonPopImages,
-    "water-balloon-images": waterBalloonImages,
-    "bullet-images": bulletImages,
-    "milk-drop-images": milkDropImages,
-    "fire-images": fireImages
+    "balloon-pop-images": BALLOON_POP_IMAGES,
+    "water-balloon-images": WATER_BALLOON_IMAGES,
+    "bullet-images": BULLET_IMAGES,
+    "milk-drop-images": MILK_DROP_IMAGES,
+    "fire-images": FIRE_IMAGES
 };
 
 
 // ----------------------- ARCHITECTURE ------------------------
-var napkinImages = {
+const NAPKIN_IMAGES = {
     series_title: "Napkin Sketches",
     category: "napkin",
     medium: "Black ink on 5in by 5in white napkins",
@@ -315,7 +315,7 @@ var napkinImages = {
     }
 };
 
-var modernHouseImages = {
+const MODERN_HOUSE_IMAGES = {
     series_title: "Modern House Design",
     category: "modern",
     medium: null,
@@ -415,7 +415,7 @@ var modernHouseImages = {
     }
 };
 
-var waveRoofImages = {
+const WAVE_ROOF_IMAGES = {
     series_title: "Wave Roof",
     category: "wave roof",
     medium: "AutoCAD",
@@ -436,7 +436,7 @@ var waveRoofImages = {
     }
 };
 
-var retreatHomeImages = {
+const RETREAT_IMAGES = {
     series_title: "Retreat Home",
     category: "retreat",
     medium: "AutoCAD",
@@ -451,7 +451,7 @@ var retreatHomeImages = {
     }
 };
 
-var vellumImages = {
+const VELLUM_IMAGES = {
     series_title: "Vellum Technical Drawings",
     category: "vellum",
     medium: "Pencil on vellum",
@@ -481,7 +481,7 @@ var vellumImages = {
     }
 };
 
-var sketchImages = {
+const SKETCH_IMAGES = {
     series_title: "Architecture Sketches",
     category: "sketch",
     medium: "Pencil on paper",
@@ -520,7 +520,7 @@ var sketchImages = {
     }
 };
 
-var concreteBlockImages = {
+const CONCRETE_BLOCK_IMAGES = {
     series_title: "Concrete Block",
     category: "model",
     medium: "Concrete block with mixed media",
@@ -559,22 +559,23 @@ var concreteBlockImages = {
     }
 };
 
-var architectureImages = {
-    "napkin-images": napkinImages, 
-    "wave-roof-images": waveRoofImages,
-    "vellum-images": vellumImages,
-    "retreat-images": retreatHomeImages,
-    "modern-house-images": modernHouseImages,
-    "sketch-images": sketchImages,
-    // "concrete-block-images": concreteBlockImages,
+const ARCHITECTURE_IMAGES = {
+    "napkin-images": NAPKIN_IMAGES, 
+    "wave-roof-images": WAVE_ROOF_IMAGES,
+    "vellum-images": VELLUM_IMAGES,
+    "retreat-images": RETREAT_IMAGES,
+    "modern-house-images": MODERN_HOUSE_IMAGES,
+    "sketch-images": SKETCH_IMAGES,
+    // "concrete-block-images": CONCRETE_BLOCK_IMAGES,
 };
 
 
 // ----------------------- PROJECTS ------------------------
-var stageImages = {
+const STAGE_CONTROL_IMAGES = {
     series_title: "Action-Triggered Stage Control",
     category: "website",
     medium: "Website",
+    video: "",
     caption: "Made for 6.835 Intelligent Multimodal UI with one other person. We created a practice tool for anyone to learn a script and the motions of a play. Using a Microsoft Kinect and the Chrome Speech API, the system provides forgotten lines or stage directions and triggers lighting and sound cues without stagehands.",
     images: {
         "stage-control": {
@@ -586,11 +587,12 @@ var stageImages = {
     }
 };
 
-var runstoppableImages = {
+const RUNSTOPPABLE_IMAGES = {
     series_title: "Runstoppable",
     category: "website",
     medium: "Website",
     link: "https://www.runstoppable.io/",
+    video: "https://youtu.be/DSHJ8CW6OxI",
     caption: "I worked on this project in 6.813 User Interface Design & Implementation with three other people. We created a platform for serious runners to keep track of their runs, compare runs, look at their running trends, and get meaningful insight of all of their running data.",
     images: {
         "runstoppable-1": {
@@ -608,7 +610,7 @@ var runstoppableImages = {
     }
 };
 
-var litresImages = {
+const LITRES_IMAGES = {
     series_title: "LiTreS - Liquid Treatment System",
     category: "eng.",
     medium: "",
@@ -641,7 +643,7 @@ var litresImages = {
     }
 };
 
-var pillminderImages = {
+const PILL_MINDER_IMAGES = {
     series_title: "MedEasy Pill-Minder",
     category: "eng.",
     medium: "",
@@ -662,9 +664,9 @@ var pillminderImages = {
     }
 };
 
-var projectsImages = {
-    "stage-images": stageImages,
-    "runstoppable-images": runstoppableImages,
+const PROJECTS_IMAGES = {
+    "stage-images": STAGE_CONTROL_IMAGES,
+    "runstoppable-images": RUNSTOPPABLE_IMAGES,
     "puns": {
         source: "images/digital/bad-puns.png",
         square: "images/digital/bad-puns-square.png",
@@ -754,12 +756,12 @@ var projectsImages = {
     //     medium: "Text Generator",
     //     caption: "Created for CMS.609 The Word Made Digital."
     // }
-    "litres-images": litresImages,
-    "pill-minder-images": pillminderImages,
+    "litres-images": LITRES_IMAGES,
+    "pill-minder-images": PILL_MINDER_IMAGES,
 };
 
 // ----------------------- WORK ------------------------
-var placesImages = {
+const PLACES_IMAGES = {
     series_title: "Places Initiative",
     category: "interface",
     medium: null,
@@ -780,7 +782,7 @@ var placesImages = {
     }
 };
 
-var manufacturingImages = {
+const MANUFACTURING_IMAGES = {
     series_title: "Manufacturing Initiative",
     category: "interface",
     medium: null,
@@ -813,7 +815,7 @@ var manufacturingImages = {
     }
 };
 
-var bbPosterImages = {
+const BB_POSTER_IMAGES = {
     series_title: "IEEE Future Technologies Conference Poster",
     category: "poster",
     medium: null,
@@ -828,7 +830,7 @@ var bbPosterImages = {
     }
 };
 
-var mwPosterImages = {
+const MW_POSTER_IMAGES = {
     series_title: "Member's Week Display",
     category: "poster",
     medium: null,
@@ -855,7 +857,7 @@ var mwPosterImages = {
     }
 };
 
-var tslLogoImages = {
+const TSL_LOGO_IMAGES = {
     series_title: "Teaching Systems Lab Logo",
     category: "logo",
     medium: null,
@@ -870,7 +872,7 @@ var tslLogoImages = {
     }
 };
 
-var competencyImages = {
+const COMPETENCY_IMAGES = {
     series_title: "Competencies Visualization",
     category: "diagram",
     medium: null,
@@ -885,7 +887,7 @@ var competencyImages = {
     }
 };
 
-var demoNightImages = {
+const DEMO_NIGHT_IMAGES = {
     series_title: "Demo Night - Collateral",
     category: "booklet",
     medium: null,
@@ -924,7 +926,7 @@ var demoNightImages = {
     }
 };
 
-var cogSciImages = {
+const COGSCI_IMAGES = {
     series_title: "Cognitive Science Cards",
     category: "graphics",
     medium: null,
@@ -993,7 +995,7 @@ var cogSciImages = {
     }
 };
 
-var sdpImages = {
+const SDP_IMAGES = {
     series_title: "Summer Design Program - Booklet",
     category: "graphics",
     medium: null,
@@ -1062,7 +1064,7 @@ var sdpImages = {
     }
 };
 
-var recruitmentImages = {
+const RECRUITMENT_IMAGES = {
     series_title: "Recruitment - Posters",
     category: "graphics",
     medium: null,
@@ -1083,7 +1085,7 @@ var recruitmentImages = {
     }
 };
 
-var balderMathImages = {
+const BALDERMATH_IMAGES = {
     series_title: "BalderMath - Tutorial",
     category: "graphics",
     medium: null,
@@ -1098,21 +1100,21 @@ var balderMathImages = {
     }
 };
 
-var tslImages = {
+const TSL_IMAGES = {
     caption: "I have worked on numerous projects from the Teaching System Lab (TSL) and their partner foundation, the Woodrow Wilson Academy. I assisted the TSL in designing student-centered learning experiences. I worked on learning materials and games. This included: producing graphical and functional designs, visualizing instructional graphics, play-testing, conducting user-testing on potential users, and revising the materials accordingly."
 };
 
-var researchImages = {
-    "places-images": placesImages,
-    "manufacturing-images": manufacturingImages,
-    "bb-poster-images": bbPosterImages,
-    "mw-poster-images": mwPosterImages,
-    "tsl-logo-images": tslLogoImages,
-    "competency-images": competencyImages,
-    "demo-night-images": demoNightImages,
-    "cog-sci-images": cogSciImages,
-    "sdp-images": sdpImages,
-    "recruitment-images": recruitmentImages,
-    "baldermath-images": balderMathImages,
+const RESEARCH_IMAGES = {
+    "places-images": PLACES_IMAGES,
+    "manufacturing-images": MANUFACTURING_IMAGES,
+    "bb-poster-images": BB_POSTER_IMAGES,
+    "mw-poster-images": MW_POSTER_IMAGES,
+    "tsl-logo-images": TSL_LOGO_IMAGES,
+    "competency-images": COMPETENCY_IMAGES,
+    "demo-night-images": DEMO_NIGHT_IMAGES,
+    "cogsci-images": COGSCI_IMAGES,
+    "sdp-images": SDP_IMAGES,
+    "recruitment-images": RECRUITMENT_IMAGES,
+    "baldermath-images": BALDERMATH_IMAGES,
 };
 

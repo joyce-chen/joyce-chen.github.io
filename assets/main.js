@@ -7,7 +7,7 @@ function loadHeader(type, subList) {
             if (type == false && subList == false) {
                 document.querySelector("header").innerHTML += data;
             } else {
-                var subNav = createSubNav(subList);
+                let subNav = createSubNav(subList);
                 document.querySelector("header").innerHTML += data;
                 document.getElementById("header").innerHTML += subNav;
                 document.getElementById("navbar-" + String(type)).classList.add("current");
@@ -27,7 +27,7 @@ function loadFooter() {
 }
 
 function openMenu() {
-  var x = document.getElementById("menu-links");
+  let x = document.getElementById("menu-links");
   if (x.style.display === "block") {
     x.style.display = "none";
   } else {
@@ -36,16 +36,16 @@ function openMenu() {
 }
 
 function createSubNav(list) {
-    var subStart = "<div><div id=\"sub-nav\" class=\"sub-nav\">";
-    var subEnd = "</div></div>";
-    var subList = "";
+    let subStart = "<div><div id=\"sub-nav\" class=\"sub-nav\">";
+    let subEnd = "</div></div>";
+    let subList = "";
 
     list.forEach(function (sub, i) {
-        var s = i + 1;
+        let s = i + 1;
         if (s == 1) {
-            var subLink = "<a id=\"subbar-" + s + "\" href=\"#" + sub.toLowerCase() + "\" class=\"active\">" + sub + "</a>";
+            subLink = "<a id=\"subbar-" + s + "\" href=\"#" + sub.toLowerCase() + "\" class=\"active\">" + sub + "</a>";
         } else {
-            var subLink = "<a id=\"subbar-" + s + "\" href=\"#" + sub.toLowerCase() + "\">" + sub + "</a>";
+            subLink = "<a id=\"subbar-" + s + "\" href=\"#" + sub.toLowerCase() + "\">" + sub + "</a>";
         }
         subList += subLink;
     });
@@ -60,7 +60,7 @@ function createSections(imageList) {
     var currentCategory = "";
 
 
-    for (var key in imageList) {
+    for (let key in imageList) {
         var value = imageList[key];
         var source = value["source"],
             category = value["category"],
@@ -88,11 +88,11 @@ function createSections(imageList) {
 
         // Creating the Sections
         if (value["series_title"] != undefined) { // Has Multiple Images
-            if (imageList == artImages || imageList == projectsImages || imageList == researchImages) {
+            if (imageList == ART_IMAGES || imageList == PROJECTS_IMAGES || imageList == RESEARCH_IMAGES) {
                 var galleryStart = "<div class=\"section-content\"><div class=\"section-display\"><div class=\"display-image\">";
                 var galleryImages = "";
 
-                for (var img in value["images"]) {
+                for (let img in value["images"]) {
                     galleryImages += "<img id=\"" + img + "\" src=\"" + value["images"][img]["source"] + "\">";
                 }
 
@@ -115,7 +115,7 @@ function createSections(imageList) {
                 compileSection(sectionWrapper, category, count, sectionName, sectionImage, sectionDescription);
             } else {
                 var multiCount = 1;
-                for (var img in value["images"]) {
+                for (let img in value["images"]) {
                     var sectionImage = "<div class=\"section-content\">" + "<div class=\"section-display\"><div class=\"display-image\"><img id=\"" + img + "\" src=\"" + value["images"][img]["source"] + "\"></div>";
 
                     var title = value["images"][img]["title"];
@@ -173,7 +173,7 @@ function compileSection(wrapper, category, i, name, image, description) {
 }
 
 function createSectionDescription(title, medium, caption, award, link) {
-    var start = "<div class=\"display-description\">" 
+    let start = "<div class=\"display-description\">" 
                 + "<div class=\"display-title\">" + title + "</div>"
                 + "<div class=\"display-medium\">" + medium + "</div><br>"
                 + "<div class=\"display-caption\">" + caption  + "</div><br>"

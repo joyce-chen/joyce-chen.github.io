@@ -27,19 +27,19 @@
     <script src="assets/main.js"></script>
    
     <script>
-    var subList = ["Media Lab", "TSL"];
+    let subList = ["Media Lab", "TSL"];
 
     loadHeader("research", subList);
     loadFooter();
 
-    createSections(researchImages);
-    var sectionCount = [4, 7];
+    createSections(RESEARCH_IMAGES);
+    let sectionCount = [4, 7];
 
     $(document).scroll(function () {
-        var position = $(document).scrollTop(); 
-        var sectionH = 570;
+        let position = $(document).scrollTop(); 
+        let sectionH = 570;
 
-        var numSection = [];
+        let numSection = [];
         sectionCount.reduce(function(a,b,i) { return numSection[i] = a+b; },0);
 
         if (position >= 0 && position <= sectionH*numSection[0]*0.95) {
